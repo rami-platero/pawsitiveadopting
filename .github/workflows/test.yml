@@ -1,15 +1,15 @@
-name: Build
+name: Testing
 on:
   workflow_run:
-    workflows: ["Test"] 
+    workflows: ["Lint"] 
     types:
       - completed
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/pnpm-install
-      - name: Build 
-        run: pnpm build
+      - name: Test
+        run: pnpm test
