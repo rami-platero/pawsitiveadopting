@@ -1,3 +1,16 @@
 {
-    
+    "NavbarLinks": {
+        "browse": {
+            "link": "/browse",
+            "title": "Browse Pets"
+        },
+        "associations": {
+            "link": "/associations",
+            "title": "Associations"
+        },
+        "about": {
+            "link": "/about",
+            "title": "About us"
+        }
+    }
 }
