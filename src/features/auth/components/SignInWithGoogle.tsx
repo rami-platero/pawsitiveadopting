@@ -1,15 +1,9 @@
-"use client"
+"use client";
 
-import { signInWithGoogle } from "@/lib/auth-client"
+import { signInWithGoogle } from "@/shared/lib/auth-client";
 
 const SignInWithGoogle = () => {
+  return <button onClick={signInWithGoogle}>Sign In With Google</button>;
+};
 
-    
-  return (
-    <button onClick={signInWithGoogle}>
-        Sign In With Google
-    </button>
-  )
-}
-
-export default SignInWithGoogle
+export default SignInWithGoogle;

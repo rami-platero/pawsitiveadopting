@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/shared/lib/auth-client";
 import React from "react";
 
 const ForgotPasswordButton = () => {
@@ -11,7 +11,6 @@ const ForgotPasswordButton = () => {
 
     console.log(error);
   };
-
 
   return <button onClick={forgotPassword}>Forgot password</button>;
 };
