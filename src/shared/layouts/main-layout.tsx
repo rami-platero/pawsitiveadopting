@@ -8,9 +8,7 @@ type Props = {
 const MainLayout = ({ children }: Props) => {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <Navbar />
       <main>{children}</main>
       <footer></footer>
     </>
