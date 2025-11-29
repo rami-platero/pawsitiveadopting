@@ -1,16 +1,32 @@
 {
-    "NavbarLinks": {
-        "browse": {
-            "link": "/browse",
-            "title": "Browse Pets"
-        },
-        "associations": {
-            "link": "/associations",
-            "title": "Associations"
-        },
-        "about": {
-            "link": "/about",
-            "title": "About us"
-        }
+  "NavbarLinks": {
+    "browse": {
+      "link": "/browse",
+      "title": "Browse Pets"
+    },
+    "associations": {
+      "link": "/associations",
+      "title": "Associations"
+    },
+    "about": {
+      "link": "/about",
+      "title": "About us"
     }
+  },
+  "HomePage": {
+    "heroSection": {
+      "subtitle": "Helping associations in 25+ countries find homes for pets.",
+      "title": "Discover the pets meant for you.",
+      "description": "We bring together adoption posts from associations and communities worldwide, so finding your next companion is easier than ever.",
+      "input": {
+        "label": "Location",
+        "placeholder": "Find pets near where you live...",
+        "button": "Search"
+      },
+      "cta": {
+        "title": "Interested in posting pets for adoption?",
+        "link": "Sign up as an association for free"
+      }
+    }
+  }
 }
