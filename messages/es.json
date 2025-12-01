@@ -1,3 +1,119 @@
 {
-    
+  "Navbar": {
+    "links": {
+      "browse": {
+        "link": "/browse",
+        "title": "Explorar Mascotas"
+      },
+      "associations": {
+        "link": "/associations",
+        "title": "Asociaciones"
+      },
+      "about": {
+        "link": "/about",
+        "title": "Acerca de nosotros"
+      }
+    },
+    "auth": {
+      "login": "Iniciar sesión",
+      "getStarted": "Comenzar"
+    }
+  },
+  "Metadata": {
+    "Home": {
+      "title": "Pawsitive Adopting",
+      "description": "Descubre mascotas disponibles para adopción en todo el mundo."
+    },
+    "Browse": {
+      "title": "Explorar Mascotas",
+      "description": "Find pets from associations across the globe."
+    },
+    "Associations": {
+      "title": "Asociaciones",
+      "description": "Aprende sobre asociaciones de adopción de mascotas."
+    },
+    "About": {
+      "title": "Acerca de nosotros",
+      "description": "Quiénes somos y qué hacemos."
+    },
+    "Login": {
+      "title": "Inicia sesión en tu cuenta",
+      "description": "¡Bienvenido! Inicia sesión para continuar en Pawsitive Adopting."
+    },
+    "SignUp": {
+      "title": "Crea tu cuenta",
+      "description": "Únete a Pawsitive Adopting para encontrar a tu compañero perfecto."
+    }
+  },
+  "HomePage": {
+    "heroSection": {
+      "subtitle": "Ayudando a asociaciones en más de 25 países a encontrar hogares para mascotas.",
+      "title": "Descubre las mascotas destinadas para ti.",
+      "description": "Reunimos publicaciones de adopción de asociaciones y comunidades de todo el mundo, para que encontrar tu próximo compañero sea más fácil que nunca.",
+      "input": {
+        "label": "Ubicación",
+        "placeholder": "Encuentra mascotas cerca de donde vives...",
+        "button": "Buscar"
+      },
+      "cta": {
+        "title": "¿Interesado en publicar mascotas en adopción?",
+        "link": "Regístrate como asociación de forma gratuita"
+      }
+    }
+  },
+  "NotFoundPage": {
+    "title": "Parece que esta página también necesita un hogar…",
+    "description": "No pudimos encontrar la página que estabas buscando.",
+    "button": "Volver al Inicio"
+  },
+  "AuthPage": {
+    "errors": {
+      "invalidEmail": "Dirección de correo electrónico no válida",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "nameTooShort": "El nombre debe tener al menos 2 caracteres",
+      "nameTooLong": "El nombre debe tener menos de 100 caracteres",
+      "passwordsDoNotMatch": "Las contraseñas no coinciden"
+    },
+    "inputs": {
+      "email": {
+        "label": "Correo electrónico",
+        "placeholder": "hola@email.com"
+      },
+      "password": {
+        "label": "Contraseña",
+        "placeholder": "Tu contraseña aquí..."
+      },
+      "name": {
+        "label": "Nombre Completo",
+        "placeholder": "Juan Pérez"
+      },
+      "confirmPassword": {
+        "label": "Confirmar Contraseña",
+        "placeholder": "Confirma tu contraseña..."
+      }
+    },
+    "submit": {
+      "logIn": "Iniciar sesión",
+      "signUp": "Regístrate"
+    },
+    "LoginPage": {
+      "title": "Inicia sesión en tu cuenta",
+      "subtitle": "¡Bienvenido! Inicia sesión para continuar en Pawsitive Adopting.",
+      "noAccount": "¿Aún no tienes una cuenta? ",
+      "signUp": "Regístrate",
+      "signInWithGoogle": "Continuar con Google",
+      "forgotPassword": "¿Olvidaste tu contraseña?"
+    },
+    "SignUpPage": {
+      "title": "Crea tu Cuenta",
+      "subtitle": "Únete a Pawsitive Adopting para encontrar tu compañero felino perfecto.",
+      "alreadyAccount": "¿Ya tienes una cuenta? ",
+      "logIn": "Inicia sesión",
+      "signInWithGoogle": "Continuar con Google",
+      "agreeTerms": "Al registrarte, aceptas nuestros",
+      "termsOfService": "Términos de Servicio",
+      "and": "y",
+      "privacyPolicy": "Política de Privacidad"
+    }
+  }
 }

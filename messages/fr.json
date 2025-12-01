@@ -1,3 +1,119 @@
 {
-    
+  "Navbar": {
+    "links": {
+      "browse": {
+        "link": "/browse",
+        "title": "Parcourir les Animaux"
+      },
+      "associations": {
+        "link": "/associations",
+        "title": "Associations"
+      },
+      "about": {
+        "link": "/about",
+        "title": "À propos de nous"
+      }
+    },
+    "auth": {
+      "login": "Se connecter",
+      "getStarted": "Commencer"
+    }
+  },
+  "Metadata": {
+    "Home": {
+      "title": "Pawsitive Adopting",
+      "description": "Découvrez des animaux disponibles pour l'adoption dans le monde entier."
+    },
+    "Browse": {
+      "title": "Parcourir les Animaux",
+      "description": "Find pets from associations across the globe."
+    },
+    "Associations": {
+      "title": "Associations",
+      "description": "Learn about pet adoption associations."
+    },
+    "About": {
+      "title": "À propos de nous",
+      "description": "Qui nous sommes et ce que nous faisons."
+    },
+    "Login": {
+      "title": "Connectez-vous à votre compte",
+      "description": "Bienvenue ! Connectez-vous pour continuer sur Pawsitive Adopting."
+    },
+    "SignUp": {
+      "title": "Créer votre Compte",
+      "description": "Rejoignez Pawsitive Adopting pour trouver votre compagnon félin parfait."
+    }
+  },
+  "HomePage": {
+    "heroSection": {
+      "subtitle": "Aider les associations dans plus des 25 pays à trouver des foyers pour les animaux.",
+      "title": "Découvrez les animaux faits pour vous.",
+      "description": "Nous rassemblons les annonces d'adoption des associations et des communautés du monde entier, pour que trouver votre prochain compagnon soit plus facile que jamais.",
+      "input": {
+        "label": "Localisation",
+        "placeholder": "Trouvez des animaux près de chez vous...",
+        "button": "Rechercher"
+      },
+      "cta": {
+        "title": "Intéressé par la publication d'animaux en adoption?",
+        "link": "Inscrivez-vous gratuitement en tant qu'association"
+      }
+    }
+  },
+  "NotFoundPage": {
+    "title": "On dirait que cette page a aussi besoin d'un foyer…",
+    "description": "Nous n'avons pas pu trouver la page que vous cherchiez.",
+    "button": "Retour à l'accueil"
+  },
+  "AuthPage": {
+    "errors": {
+      "invalidEmail": "Adresse e-mail invalide",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
+      "nameTooShort": "Le nom doit contenir au moins 2 caractères",
+      "nameTooLong": "Le nom doit contenir moins de 100 caractères",
+      "passwordsDoNotMatch": "Les mots de passe ne correspondent pas"
+    },
+    "inputs": {
+      "email": {
+        "label": "E-mail",
+        "placeholder": "Entrez votre adresse e-mail"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Votre mot de passe ici..."
+      },
+      "name": {
+        "label": "Nom Complet",
+        "placeholder": "Jean Dupont"
+      },
+      "confirmPassword": {
+        "label": "Confirmer le Mot de Passe",
+        "placeholder": "Confirmez votre mot de passe..."
+      }
+    },
+    "submit": {
+      "logIn": "Se connecter",
+      "signUp": "S'inscrire"
+    },
+    "LoginPage": {
+      "title": "Connectez-vous à votre compte",
+      "subtitle": "Bienvenue ! Connectez-vous pour continuer sur Pawsitive Adopting.",
+      "noAccount": "Vous n'avez pas encore de compte ? ",
+      "signUp": "S'inscrire",
+      "signInWithGoogle": "Continuer avec Google",
+      "forgotPassword": "Mot de passe oublié ?"
+    },
+    "SignUpPage": {
+      "title": "Créer votre Compte",
+      "subtitle": "Rejoignez Pawsitive Adopting pour trouver votre compagnon félin parfait.",
+      "alreadyAccount": "Vous avez déjà un compte ? ",
+      "logIn": "Se connecter",
+      "signInWithGoogle": "Continuer avec Google",
+      "agreeTerms": "En vous inscrivant, vous acceptez nos",
+      "termsOfService": "Conditions d'utilisation",
+      "and": "et",
+      "privacyPolicy": "Politique de Confidentialité"
+    }
+  }
 }

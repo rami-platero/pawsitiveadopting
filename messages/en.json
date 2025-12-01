@@ -1,16 +1,48 @@
 {
-  "NavbarLinks": {
-    "browse": {
-      "link": "/browse",
-      "title": "Browse Pets"
+  "Navbar": {
+    "links": {
+      "browse": {
+        "link": "/browse",
+        "title": "Browse Pets"
+      },
+      "associations": {
+        "link": "/associations",
+        "title": "Associations"
+      },
+      "about": {
+        "link": "/about",
+        "title": "About us"
+      }
     },
-    "associations": {
-      "link": "/associations",
-      "title": "Associations"
+    "auth": {
+      "login": "Login",
+      "getStarted": "Get Started"
+    }
+  },
+  "Metadata": {
+    "Home": {
+      "title": "Pawsitive Adopting",
+      "description": "Discover pets available for adoption around the world."
     },
-    "about": {
-      "link": "/about",
-      "title": "About us"
+    "Browse": {
+      "title": "Browse Pets",
+      "description": "Find pets from associations across the globe."
+    },
+    "Associations": {
+      "title": "Associations",
+      "description": "Learn about pet adoption associations."
+    },
+    "About": {
+      "title": "About us",
+      "description": "Who we are and what we do."
+    },
+    "Login": {
+      "title": "Login to Your Account",
+      "description": "Welcome! Log in to continue to Pawsitive Adopting."
+    },
+    "SignUp": {
+      "title": "Create Your Account",
+      "description": "Join Pawsitive Adopting to find your perfect pet companion."
     }
   },
   "HomePage": {
@@ -27,6 +59,64 @@
         "title": "Interested in posting pets for adoption?",
         "link": "Sign up as an association for free"
       }
+    }
+  },
+  "NotFoundPage": {
+    "title": "Looks like this page needs a home too…",
+    "description": "We couldn't find the page you were looking for.",
+    "button": "Back to Home"
+  },
+  "AuthPage": {
+    "errors": {
+      "invalidEmail": "Invalid email address",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "nameTooShort": "Name must be at least 2 characters long",
+      "nameTooLong": "Name must be less than 100 characters long",
+      "passwordsDoNotMatch": "Passwords don't match"
+    },
+    "inputs": {
+      "email": {
+        "label": "Email",
+        "placeholder": "hello@email.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Your password goes here..."
+      },
+      "rememberMe": {
+        "label": "Remember Me"
+      },
+      "name": {
+        "label": "Full Name",
+        "placeholder": "John Doe"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm your password..."
+      }
+    },
+    "submit": {
+      "logIn": "Log In",
+      "signUp": "Sign Up"
+    },
+    "LoginPage": {
+      "title": "Welcome Back",
+      "subtitle": "Welcome! Log in to continue to Pawsitive Adopting.",
+      "noAccount": "Don't have an account yet? ",
+      "signUp": "Sign up",
+      "signInWithGoogle": "Continue with Google",
+      "forgotPassword": "Forgot your password?"
+    },
+    "SignUpPage": {
+      "title": "Create Your Account",
+      "subtitle": "Join Pawsitive Adopting to find your perfect pet companion.",
+      "alreadyAccount": "Already have an account? ",
+      "logIn": "Log in",
+      "signInWithGoogle": "Continue with Google",
+      "agreeTerms": "By signing up, you agree to our",
+      "termsOfService": "Terms of Service",
+      "and": "and",
+      "privacyPolicy": "Privacy Policy"
     }
   }
 }
