@@ -24,7 +24,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={jost.className}>
-      <body className="bg-background">
+      <body className="bg-background selection:bg-primary/50 selection:text-secondary">
         <Providers>
           <MainLayout>{children}</MainLayout>
         </Providers>
