@@ -1,0 +1,22 @@
+{
+  "extends": "@pawsitiveadopting/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts"
+, "src/__tests__/page.test.tsx", "jest.config.ts"  ],
+  "exclude": ["node_modules"]
+}

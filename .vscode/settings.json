@@ -1,6 +1,12 @@
 {
-    "i18n-ally.localesPaths": [
-        "messages",
-        "src/i18n"
-    ]
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "i18n-ally.localesPaths": ["apps/*/messages", "packages/*/messages"],
+  "i18n-ally.enabledFrameworks": ["next-intl", "react", "general"]
 }

@@ -1,5 +1,5 @@
 import Container from "@/shared/components/Container";
-import { Button, buttonVariants } from "@/shared/components/ui/button";
+import { buttonVariants } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import { Home } from "lucide-react";
 import { useTranslations } from "next-intl";
