@@ -1,0 +1,1 @@
+export { default } from "@pawsitiveadopting/tailwind-config/postcss.config";
