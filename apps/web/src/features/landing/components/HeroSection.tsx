@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@pawsitiveadopting/ui/components/button";
 
 export default function HeroSection() {
   const t = useTranslations("HomePage.heroSection");

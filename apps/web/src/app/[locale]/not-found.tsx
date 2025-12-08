@@ -1,10 +1,10 @@
 import Container from "@/shared/components/Container";
-import { buttonVariants } from "@/shared/components/ui/button";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@pawsitiveadopting/ui/lib/utils";
 import { Home } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { buttonVariants } from '@pawsitiveadopting/ui/components/button'
 
 export default function NotFound() {
   const t = useTranslations("NotFoundPage");
