@@ -1,5 +1,7 @@
 "use server";
 import { auth } from "@/shared/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const signIn = async () => {
   await auth.api.signInEmail({
@@ -19,3 +21,11 @@ export const signUp = async () => {
     },
   });
 };
+
+export const signOut = async () => {
+  await auth.api.signOut({
+    headers: await headers(),
+  });
+
+  redirect("/");
+}
