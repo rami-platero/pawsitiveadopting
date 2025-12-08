@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin()
+const withNextIntl = createNextIntlPlugin();
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [new URL("https://lh3.googleusercontent.com/**")],
+  },
+  transpilePackages: ["@pawsitiveadopting/ui"]
+};
 
 export default withNextIntl(nextConfig);
