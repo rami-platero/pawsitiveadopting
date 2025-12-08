@@ -1,18 +1,21 @@
-import { buttonVariants } from "./ui/button";
-import { useTranslations } from "next-intl";
+import { buttonVariants } from "@pawsitiveadopting/ui/components/button";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@pawsitiveadopting/ui/lib/utils";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/shared/components/ui/accordion";
+} from "@pawsitiveadopting/ui/components/accordion";
 import { Menu } from "lucide-react";
-import Logo from "./Logo";
+import Logo from "../Logo";
+import AccountNavbar from "./account-navbar";
+import { getSession } from "@/features/auth/actions/server";
 
-const Navbar = () => {
-  const t = useTranslations("Navbar");
+const Navbar = async () => {
+  const session = await getSession()
+  const t = await getTranslations("Navbar");
   const items = [
     {
       title: t("links.browse.title"),
@@ -48,19 +51,21 @@ const Navbar = () => {
         <AccordionItem value="nav">
           <div className="flex flex-col lg:flex-row gap-2 max-w-7xl mx-auto">
             <div className="flex flex-row justify-between items-center w-full px-4 h-(--navbar-h)">
-              <Logo size="sm"/>
+              <Logo size="sm" />
               {/* desktop nav items */}
               <div className="hidden lg:block">{renderNavItems()}</div>
               <div className="flex items-center gap-2">
-                <Link
-                  href={"/login"}
-                  className={cn(buttonVariants({ variant: "ghost" }))}
-                >
-                  {t("auth.login")}
-                </Link>
-                <Link href={"/sign-up"} className={cn(buttonVariants())}>
-                  {t("auth.getStarted")}
-                </Link>
+                {!session ? <div className="flex items-center gap-2">
+                  <Link
+                    href={"/login"}
+                    className={cn(buttonVariants({ variant: "ghost" }))}
+                  >
+                    {t("auth.login")}
+                  </Link>
+                  <Link href={"/sign-up"} className={cn(buttonVariants())}>
+                    {t("auth.getStarted")}
+                  </Link>
+                </div> : <AccountNavbar user={session.user} />}
                 {/* mobile trigger button */}
                 <AccordionTrigger className="lg:hidden">
                   <Menu />
