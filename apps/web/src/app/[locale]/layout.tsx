@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Providers from "@/context/providers";
 import MainLayout from "@/shared/layouts/main-layout";
-import "@/app/globals.css";
 import { Jost } from "next/font/google";
+import "@pawsitiveadopting/tailwind-config/globals.css";
 
 const jost = Jost({
   subsets: ["latin"],
