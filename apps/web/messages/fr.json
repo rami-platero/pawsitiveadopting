@@ -83,6 +83,9 @@
         "label": "Mot de passe",
         "placeholder": "Votre mot de passe ici..."
       },
+      "rememberMe": {
+        "label": "Se souvenir de moi"
+      },
       "name": {
         "label": "Nom Complet",
         "placeholder": "Jean Dupont"

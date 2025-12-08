@@ -83,6 +83,9 @@
         "label": "Contraseña",
         "placeholder": "Tu contraseña aquí..."
       },
+      "rememberMe": {
+        "label": "Recuérdame"
+      },
       "name": {
         "label": "Nombre Completo",
         "placeholder": "Juan Pérez"
