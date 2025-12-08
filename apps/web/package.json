@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --port 3000 --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "pnpm db:migrate && next start",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@neondatabase/serverless": "^1.0.2",
     "@next/env": "^16.0.7",
     "@pawsitiveadopting/ui": "workspace:^",
     "@react-email/components": "^1.0.1",
