@@ -2,9 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { Button } from "@/shared/components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,12 +9,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
+} from "@pawsitiveadopting/ui/components/form";
+import { Input } from "@pawsitiveadopting/ui/components/input";
 import { useTranslations } from "next-intl";
-import { Checkbox } from "@/shared/components/ui/checkbox";
 import Link from "next/link";
 import { type LoginFormData, loginFormSchema } from "../../schema";
+import { Checkbox } from "@pawsitiveadopting/ui/components/checkbox";
+import { Button } from "@pawsitiveadopting/ui/components/button";
 
 export default function EmailLoginForm() {
   const t = useTranslations("AuthPage");

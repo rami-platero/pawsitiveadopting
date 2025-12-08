@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/shared/components/ui/button";
 import { signInWithGoogle } from "@/shared/lib/auth-client";
+import { Button } from "@pawsitiveadopting/ui/components/button";
 import { useTranslations } from "next-intl";
 import { FcGoogle } from "react-icons/fc";
 

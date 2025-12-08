@@ -2,20 +2,12 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
-import { Button } from "@/shared/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { registerFormSchema, type RegisterFormData } from "../../schema";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@pawsitiveadopting/ui/components/form";
+import { Input } from "@pawsitiveadopting/ui/components/input";
+import { Button } from "@pawsitiveadopting/ui/components/button";
 
 export default function EmailRegisterForm() {
   const t = useTranslations("AuthPage");
