@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../components/navbar/navbar";
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 const MainLayout = ({ children }: Props) => {
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <main>{children}</main>
       <footer></footer>
     </>
