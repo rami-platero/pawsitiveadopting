@@ -43,6 +43,10 @@
     "SignUp": {
       "title": "Crea tu cuenta",
       "description": "Únete a Pawsitive Adopting para encontrar a tu compañero perfecto."
+    },
+    "NotFound": {
+      "title": "Página no encontrada",
+      "description": "No pudimos encontrar la página que estabas buscando."
     }
   },
   "HomePage": {

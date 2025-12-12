@@ -43,6 +43,10 @@
     "SignUp": {
       "title": "Create Your Account",
       "description": "Join Pawsitive Adopting to find your perfect pet companion."
+    },
+    "NotFound": {
+      "title": "Page Not Found",
+      "description": "We couldn't find the page you were looking for."
     }
   },
   "HomePage": {

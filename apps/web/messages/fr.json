@@ -43,6 +43,10 @@
     "SignUp": {
       "title": "Créer votre Compte",
       "description": "Rejoignez Pawsitive Adopting pour trouver votre compagnon félin parfait."
+    },
+    "NotFound": {
+      "title": "Page non trouvée",
+      "description": "Nous n'avons pas pu trouver la page que vous cherchiez."
     }
   },
   "HomePage": {
