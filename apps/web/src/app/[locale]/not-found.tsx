@@ -11,7 +11,7 @@ export default function NotFound() {
 
   return (
     <Container className="full-screen-center">
-      <Image alt="" src={"/assets/img/cat.png"} width={500} height={500} />
+      <Image alt="cat-image" src={"/assets/img/cat.png"} width={500} height={500} />
       <div className="flex flex-col gap-4 items-center text-center">
         <h1 className="md:text-5xl text-4xl font-medium max-w-xl">
           {t("title")}
