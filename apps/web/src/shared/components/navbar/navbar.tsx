@@ -1,5 +1,4 @@
 import { buttonVariants } from "@pawsitiveadopting/ui/components/button";
-import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { cn } from "@pawsitiveadopting/ui/lib/utils";
 import {
@@ -11,11 +10,11 @@ import {
 import { Menu } from "lucide-react";
 import Logo from "../Logo";
 import AccountNavbar from "./account-navbar";
-import { getSession } from "@/features/auth/actions/server";
+import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
-const Navbar = async () => {
-  const session = await getSession()
-  const t = await getTranslations("Navbar");
+const Navbar = () => {
+  const t = useTranslations("Navbar");
   const items = [
     {
       title: t("links.browse.title"),
@@ -55,17 +54,9 @@ const Navbar = async () => {
               {/* desktop nav items */}
               <div className="hidden lg:block">{renderNavItems()}</div>
               <div className="flex items-center gap-2">
-                {!session ? <div className="flex items-center gap-2">
-                  <Link
-                    href={"/login"}
-                    className={cn(buttonVariants({ variant: "ghost" }))}
-                  >
-                    {t("auth.login")}
-                  </Link>
-                  <Link href={"/sign-up"} className={cn(buttonVariants())}>
-                    {t("auth.getStarted")}
-                  </Link>
-                </div> : <AccountNavbar user={session.user} />}
+                <Suspense fallback={<div>Loading Avatar</div>}>
+                  <AccountNavbar/>
+                </Suspense>
                 {/* mobile trigger button */}
                 <AccordionTrigger className="lg:hidden">
                   <Menu />
