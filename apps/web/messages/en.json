@@ -66,6 +66,33 @@
     "description": "We couldn't find the page you were looking for.",
     "button": "Back to Home"
   },
+  "Footer": {
+    "brand": {
+      "description": "Connecting loving homes with pets in need. We bring together adoption posts from associations worldwide to make finding your perfect companion easier."
+    },
+    "explore": {
+      "title": "Explore"
+    },
+    "company": {
+      "title": "Company",
+      "contact": "Contact",
+      "careers": "Careers",
+      "blog": "Blog"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "email": "Email"
+    },
+    "copyright": "© {year} Pawsitive Adopting. All rights reserved."
+  },
   "AuthPage": {
     "errors": {
       "invalidEmail": "Invalid email address",

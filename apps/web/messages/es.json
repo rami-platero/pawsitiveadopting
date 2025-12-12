@@ -66,6 +66,33 @@
     "description": "No pudimos encontrar la página que estabas buscando.",
     "button": "Volver al Inicio"
   },
+  "Footer": {
+    "brand": {
+      "description": "Conectando hogares amorosos con mascotas necesitadas. Reunimos publicaciones de adopción de asociaciones de todo el mundo para hacer más fácil encontrar tu compañero perfecto."
+    },
+    "explore": {
+      "title": "Explorar"
+    },
+    "company": {
+      "title": "Compañía",
+      "contact": "Contacto",
+      "careers": "Carreras",
+      "blog": "Blog"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "cookies": "Política de Cookies"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "email": "Correo electrónico"
+    },
+    "copyright": "© {year} Pawsitive Adopting. Todos los derechos reservados."
+  },
   "AuthPage": {
     "errors": {
       "invalidEmail": "Dirección de correo electrónico no válida",

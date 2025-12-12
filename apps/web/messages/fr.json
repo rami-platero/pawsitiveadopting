@@ -66,6 +66,33 @@
     "description": "Nous n'avons pas pu trouver la page que vous cherchiez.",
     "button": "Retour à l'accueil"
   },
+  "Footer": {
+    "brand": {
+      "description": "Connecter des foyers aimants avec des animaux dans le besoin. Nous rassemblons les annonces d'adoption d'associations du monde entier pour faciliter la recherche de votre compagnon idéal."
+    },
+    "explore": {
+      "title": "Explorer"
+    },
+    "company": {
+      "title": "Entreprise",
+      "contact": "Contact",
+      "careers": "Carrières",
+      "blog": "Blog"
+    },
+    "legal": {
+      "title": "Légal",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'Utilisation",
+      "cookies": "Politique des Cookies"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram",
+      "email": "E-mail"
+    },
+    "copyright": "© {year} Pawsitive Adopting. Tous droits réservés."
+  },
   "AuthPage": {
     "errors": {
       "invalidEmail": "Adresse e-mail invalide",
