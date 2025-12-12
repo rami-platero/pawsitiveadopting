@@ -2,9 +2,14 @@ import EmailLoginForm from "@/features/auth/components/login/EmailLoginForm";
 import SignInWithGoogle from "@/features/auth/components/SignInWithGoogle";
 import Container from "@/shared/components/Container";
 import Logo from "@/shared/components/Logo";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+
+type PageProps = {
+  params: {
+    locale: string
+  }
+}
 
 export async function generateMetadata() {
   const t = await getTranslations('Metadata.Login');
@@ -15,8 +20,9 @@ export async function generateMetadata() {
   };
 }
 
-export default function LoginPage() {
-  const t = useTranslations("AuthPage.LoginPage");
+export default async function LoginPage({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({locale, namespace: "AuthPage.LoginPage"});
 
   return (
     <Container className="full-screen-center gap-6 max-w-sm items-center">
@@ -32,14 +38,13 @@ export default function LoginPage() {
             {t("signUp")}
           </Link>
         </div>
-        {/* <h2 className="text-sm text-secondary/70">{t("subtitle")}</h2> */}
       </div>
       <EmailLoginForm />
 
       {/* Divider */}
       <div className="flex items-center w-full">
         <div className="flex-1 h-px bg-gray-300"></div>
-        <span className="px-4 text-xs text-gray-500">OR</span>
+        <span className="px-4 text-xs text-gray-500">{t("or")}</span>
         <div className="flex-1 h-px bg-gray-300"></div>
       </div>
 

@@ -1,6 +1,12 @@
 import HeroSection from "@/features/landing/components/HeroSection";
 import { getTranslations } from "next-intl/server";
 
+type PageProps = {
+  params: {
+    locale: string
+  }
+}
+
 export async function generateMetadata() {
   const t = await getTranslations('Metadata.Home');
 
@@ -10,6 +16,7 @@ export async function generateMetadata() {
   };
 }
 
-export default function HomePage() {
-  return <HeroSection />;
+export default async function HomePage({params}: PageProps) {
+  const { locale } = await params;
+  return <HeroSection locale={locale}/>;
 }

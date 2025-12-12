@@ -1,12 +1,17 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { type Locale } from "next-intl";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@pawsitiveadopting/ui/components/button";
+import { getTranslations } from "next-intl/server";
 
-export default function HeroSection() {
-  const t = useTranslations("HomePage.heroSection");
+type Props = {
+  locale: Locale
+}
+
+export default async function HeroSection({ locale }: Props) {
+  "use cache"
+
+  const t = await getTranslations({ locale, namespace: "HomePage.heroSection" });
 
   return (
     <section className="w-full">
