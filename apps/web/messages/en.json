@@ -105,7 +105,8 @@
       "noAccount": "Don't have an account yet? ",
       "signUp": "Sign up",
       "signInWithGoogle": "Continue with Google",
-      "forgotPassword": "Forgot your password?"
+      "forgotPassword": "Forgot your password?",
+      "or": "OR"
     },
     "SignUpPage": {
       "title": "Create Your Account",
@@ -116,7 +117,8 @@
       "agreeTerms": "By signing up, you agree to our",
       "termsOfService": "Terms of Service",
       "and": "and",
-      "privacyPolicy": "Privacy Policy"
+      "privacyPolicy": "Privacy Policy",
+      "or": "OR"
     }
   }
 }

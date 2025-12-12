@@ -105,7 +105,8 @@
       "noAccount": "¿Aún no tienes una cuenta? ",
       "signUp": "Regístrate",
       "signInWithGoogle": "Continuar con Google",
-      "forgotPassword": "¿Olvidaste tu contraseña?"
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "or": "O"
     },
     "SignUpPage": {
       "title": "Crea tu Cuenta",
@@ -116,7 +117,8 @@
       "agreeTerms": "Al registrarte, aceptas nuestros",
       "termsOfService": "Términos de Servicio",
       "and": "y",
-      "privacyPolicy": "Política de Privacidad"
+      "privacyPolicy": "Política de Privacidad",
+      "or": "O"
     }
   }
 }
