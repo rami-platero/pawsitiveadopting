@@ -118,9 +118,7 @@ export default function EmailRegisterForm() {
           </Link>
         </div>
 
-        <Button className="w-full" type="submit" onClick={() => {
-          form.handleSubmit(onSubmit)
-        }} isLoading={form.formState.isSubmitting}>
+        <Button className="w-full" type="submit" isLoading={form.formState.isSubmitting}>
           {t("submit.signUp")}
         </Button>
       </form>
