@@ -16,6 +16,7 @@ import Link from "next/link";
 import { type LoginFormData, loginFormSchema } from "../../schema";
 import { Checkbox } from "@pawsitiveadopting/ui/components/checkbox";
 import { Button } from "@pawsitiveadopting/ui/components/button";
+import { signIn } from "@/features/auth/actions/auth.actions";
 
 export default function EmailLoginForm() {
   const t = useTranslations("AuthPage");
@@ -29,8 +30,8 @@ export default function EmailLoginForm() {
     },
   });
 
-  function onSubmit(values: LoginFormData) {
-    console.log(values);
+  async function onSubmit(values: LoginFormData) {
+    await signIn({ email: values.email, password: values.password });
   }
 
   return (
@@ -97,7 +98,7 @@ export default function EmailLoginForm() {
           </Link>
         </div>
 
-        <Button className="w-full" type="submit">
+        <Button className="w-full" type="submit" isLoading={form.formState.isSubmitting}>
           {t("submit.logIn")}
         </Button>
       </form>

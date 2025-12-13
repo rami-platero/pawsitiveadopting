@@ -8,6 +8,7 @@ import { registerFormSchema, type RegisterFormData } from "../../schema";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@pawsitiveadopting/ui/components/form";
 import { Input } from "@pawsitiveadopting/ui/components/input";
 import { Button } from "@pawsitiveadopting/ui/components/button";
+import { signUp } from "@/features/auth/actions/auth.actions";
 
 export default function EmailRegisterForm() {
   const t = useTranslations("AuthPage");
@@ -22,15 +23,19 @@ export default function EmailRegisterForm() {
     },
   });
 
-  function onSubmit(values: RegisterFormData) {
-    console.log(values);
+  async function onSubmit(values: RegisterFormData) {
+    await signUp({
+      email: values.email,
+      password: values.password,
+      name: values.name,
+    });
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full max-w-sm"
+        className="space-y-6 w-full max-w-sm selection:bg-secondary/50 selection:text-primary"
       >
         <FormField
           control={form.control}
@@ -113,7 +118,9 @@ export default function EmailRegisterForm() {
           </Link>
         </div>
 
-        <Button className="w-full" type="submit">
+        <Button className="w-full" type="submit" onClick={() => {
+          form.handleSubmit(onSubmit)
+        }} isLoading={form.formState.isSubmitting}>
           {t("submit.signUp")}
         </Button>
       </form>
