@@ -29,24 +29,30 @@ export default async function AccountNavbar() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger>
-        <Image
-          src={session.user.image ?? "/assets/img/default-avatar.png"}
-          alt={session.user.name ?? "avatar"}
-          width={40}
-          height={40}
-          className="object-cover cursor-pointer rounded-full"
-        />
+        {session.user.image ?
+          <Image
+            src={session.user.image ?? "/assets/img/default-avatar.png"}
+            alt={session.user.name ?? "avatar"}
+            width={40}
+            height={40}
+            className="object-cover rounded-full"
+          /> :
+          <div className="w-10 h-10 bg-secondary rounded-full cursor-pointer" />
+        }
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-72 mr-2">
         <div className="px-2 py-1 flex gap-2 items-center">
-          <Image
-            src={session.user.image ?? "/assets/img/default-avatar.png"}
-            alt={session.user.name ?? "avatar"}
-            width={32}
-            height={32}
-            className="object-cover rounded-full"
-          />
+          {session.user.image ?
+            <Image
+              src={session.user.image ?? "/assets/img/default-avatar.png"}
+              alt={session.user.name ?? "avatar"}
+              width={32}
+              height={32}
+              className="object-cover rounded-full"
+            /> :
+            <div className="w-8 h-8 bg-secondary rounded-full" />
+          }
           <div>
             <h3 className="text-sm font-medium">{session.user.name ?? session.user.email}</h3>
             <h4 className="text-xs text-muted-foreground">{session.user.email}</h4>
@@ -58,7 +64,7 @@ export default async function AccountNavbar() {
         <div className="flex flex-col gap-1">
           <Link href="/dashboard" className={cn(buttonVariants({ variant: "item" }))}><LayoutDashboard />Dashboard</Link>
           <Link href="/settings" className={cn(buttonVariants({ variant: "item" }))}><Settings />Settings</Link>
-          <SignOutButton/>
+          <SignOutButton />
         </div>
 
       </DropdownMenuContent>
