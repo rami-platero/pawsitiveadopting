@@ -3,23 +3,38 @@ import { auth } from "@/shared/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export const signIn = async () => {
-  await auth.api.signInEmail({
-    body: {
-      email: "ramiplatero11@gmail.com",
-      password: "password",
-    },
-  });
+type CreateUserParams = {
+  email: string;
+  password: string;
+  name: string;
 };
 
-export const signUp = async () => {
-  await auth.api.signUpEmail({
+type SignInParams = {
+  email: string;
+  password: string;
+};
+
+export const signIn = async ({ email, password }: SignInParams) => {
+  await auth.api.signInEmail({
     body: {
-      email: "ramiplatero11@gmail.com",
-      password: "password",
-      name: "Ramiro Platero",
+      email,
+      password,
     },
   });
+
+  redirect("/");
+};
+
+export const signUp = async ({ email, password, name }: CreateUserParams) => {
+  await auth.api.signUpEmail({
+    body: {
+      email,
+      password,
+      name,
+    },
+  });
+
+  redirect("/");
 };
 
 export const signOut = async () => {
@@ -28,4 +43,4 @@ export const signOut = async () => {
   });
 
   redirect("/");
-}
+};
