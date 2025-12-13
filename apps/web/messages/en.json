@@ -103,7 +103,10 @@
       "passwordTooShort": "Password must be at least 8 characters long",
       "nameTooShort": "Name must be at least 2 characters long",
       "nameTooLong": "Name must be less than 100 characters long",
-      "passwordsDoNotMatch": "Passwords don't match"
+      "passwordsDoNotMatch": "Passwords don't match",
+      "passwordLowercaseRequired": "Password must contain at least one lowercase letter",
+      "passwordUppercaseRequired": "Password must contain at least one uppercase letter",
+      "passwordNumberRequired": "Password must contain at least one number"
     },
     "inputs": {
       "email": {

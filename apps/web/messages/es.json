@@ -103,7 +103,10 @@
       "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
       "nameTooShort": "El nombre debe tener al menos 2 caracteres",
       "nameTooLong": "El nombre debe tener menos de 100 caracteres",
-      "passwordsDoNotMatch": "Las contraseñas no coinciden"
+      "passwordsDoNotMatch": "Las contraseñas no coinciden",
+      "passwordLowercaseRequired": "La contraseña debe contener al menos una letra minúscula",
+      "passwordUppercaseRequired": "La contraseña debe contener al menos una letra mayúscula",
+      "passwordNumberRequired": "La contraseña debe contener al menos un número"
     },
     "inputs": {
       "email": {
