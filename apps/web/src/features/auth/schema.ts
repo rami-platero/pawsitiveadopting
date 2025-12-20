@@ -1,19 +1,16 @@
-import { _Translator } from "next-intl";
+import { TFn } from "@/types/translations";
 import z from "zod";
 
-export const loginFormSchema = (
-  t: _Translator<Record<string, any>, "AuthPage">
-) => {
+
+export const loginFormSchema = (t: TFn<"AuthPage">) => {
   return z.object({
     email: z.email(t("errors.invalidEmail")),
-    password: z.string().min(8, t("errors.passwordTooShort")),
+    password: z.string().min(1, t("errors.passwordRequired")),
     rememberMe: z.boolean().optional(),
   });
 };
 
-export const registerFormSchema = (
-  t: _Translator<Record<string, any>, "AuthPage">
-) => {
+export const registerFormSchema = (t: TFn<"AuthPage">) => {
   return z
     .object({
       name: z
