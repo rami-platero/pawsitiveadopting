@@ -5,12 +5,15 @@ import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { registerFormSchema, type RegisterFormData } from "../../schema";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@pawsitiveadopting/ui/components/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@pawsitiveadopting/ui/components/form";
 import { Input } from "@pawsitiveadopting/ui/components/input";
 import { Button } from "@pawsitiveadopting/ui/components/button";
-import { signUp } from "@/features/auth/actions/auth.actions";
+import { signUp } from "@/features/auth/actions/authClient.actions";
+import { toast } from "sonner";
+import { useAuthFlow } from "@/features/auth/components/context/AuthFlowContext";
 
 export default function EmailRegisterForm() {
+  const { goToVerification } = useAuthFlow()
   const t = useTranslations("AuthPage");
 
   const form = useForm<RegisterFormData>({
@@ -24,18 +27,23 @@ export default function EmailRegisterForm() {
   });
 
   async function onSubmit(values: RegisterFormData) {
-    await signUp({
+    const { error } = await signUp({
       email: values.email,
       password: values.password,
       name: values.name,
     });
+    if (error) {
+      toast.error(t(`errors.api.${error.code}`) || error.message);
+    } else {
+      goToVerification(values.email)
+    }
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full max-w-sm selection:bg-secondary/50 selection:text-primary"
+        className="space-y-6 w-full selection:bg-secondary/50 selection:text-primary"
       >
         <FormField
           control={form.control}
@@ -78,6 +86,7 @@ export default function EmailRegisterForm() {
                   {...field}
                 />
               </FormControl>
+              <FormDescription>{t("inputs.password.description")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}

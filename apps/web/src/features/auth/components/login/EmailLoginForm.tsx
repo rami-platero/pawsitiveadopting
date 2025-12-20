@@ -16,10 +16,13 @@ import Link from "next/link";
 import { type LoginFormData, loginFormSchema } from "../../schema";
 import { Checkbox } from "@pawsitiveadopting/ui/components/checkbox";
 import { Button } from "@pawsitiveadopting/ui/components/button";
-import { signIn } from "@/features/auth/actions/auth.actions";
+import { signIn } from "@/features/auth/actions/authClient.actions";
+import { toast } from "sonner";
+import { useAuthFlow } from "@/features/auth/components/context/AuthFlowContext";
 
 export default function EmailLoginForm() {
   const t = useTranslations("AuthPage");
+  const { goToVerification } = useAuthFlow()
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema(t)),
@@ -31,14 +34,21 @@ export default function EmailLoginForm() {
   });
 
   async function onSubmit(values: LoginFormData) {
-    await signIn({ email: values.email, password: values.password });
+    const { error } = await signIn({ email: values.email, password: values.password });
+    if (error) {
+      if (error.code === "EMAIL_NOT_VERIFIED") {
+        goToVerification(values.email)
+      } else {
+        toast.error(t(`errors.api.${error.code}`) || error.message);
+      }
+    }
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 w-full max-w-sm"
+        className="space-y-6 w-full selection:bg-secondary/50 selection:text-primary"
       >
         <FormField
           control={form.control}
