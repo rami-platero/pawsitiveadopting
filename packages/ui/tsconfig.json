@@ -1,6 +1,11 @@
 {
-  "extends": "@pawsitiveadopting/typescript-config/react-library.json",
+  "extends": "@pawsitiveadopting/typescript-config/nextjs.json",
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
       "@pawsitiveadopting/ui/*": ["./src/*"]
