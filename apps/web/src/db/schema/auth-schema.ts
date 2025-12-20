@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, pgEnum, integer } from "drizzle-orm/pg-core";
 
 export const rolesEnum = pgEnum("role", ["admin", "regular"]);
 
@@ -9,6 +9,8 @@ export const user = pgTable("user", {
   emailVerified: boolean("email_verified")
     .$defaultFn(() => false)
     .notNull(),
+  verificationEmailSentAt: timestamp("verification_email_sent_at"),
+  verificationEmailCount: integer("verification_email_count").default(0).notNull(),
   image: text("image"),
   createdAt: timestamp("created_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
