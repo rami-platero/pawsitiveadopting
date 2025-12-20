@@ -106,7 +106,14 @@
       "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
       "passwordLowercaseRequired": "Le mot de passe doit contenir au moins une lettre minuscule",
       "passwordUppercaseRequired": "Le mot de passe doit contenir au moins une lettre majuscule",
-      "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre"
+      "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre",
+      "passwordRequired": "Le mot de passe est requis",
+      "api": {
+        "INVALID_EMAIL_OR_PASSWORD": "E-mail ou mot de passe invalide",
+        "EMAIL_NOT_VERIFIED": "E-mail non vérifié. Veuillez vérifier votre boîte de réception.",
+        "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "L'utilisateur existe déjà. Veuillez utiliser un autre e-mail.",
+        "VERIFICATION_EMAIL_RECENTLY_SENT": "Un e-mail de vérification a été envoyé récemment. Veuillez vérifier votre boîte de réception."
+      }
     },
     "inputs": {
       "email": {
@@ -115,7 +122,8 @@
       },
       "password": {
         "label": "Mot de passe",
-        "placeholder": "Votre mot de passe ici..."
+        "placeholder": "Votre mot de passe ici...",
+        "description": "Le mot de passe doit contenir au moins 8 caractères, incluant des majuscules, des minuscules et un chiffre."
       },
       "rememberMe": {
         "label": "Se souvenir de moi"
@@ -153,6 +161,14 @@
       "and": "et",
       "privacyPolicy": "Politique de Confidentialité",
       "or": "OU"
+    },
+    "VerificationSent": {
+      "title": "E-mail de Vérification Envoyé",
+      "description": "Nous avons envoyé un e-mail de vérification à {email}.",
+      "description2": "Veuillez vérifier votre boîte de réception et cliquer sur le lien pour vérifier votre compte.",
+      "resend": "Renvoyer l'E-mail",
+      "verificationResent": "E-mail de vérification renvoyé avec succès.",
+      "resendError": "Erreur lors du renvoi de l'e-mail de vérification. Veuillez réessayer plus tard."
     }
   }
 }

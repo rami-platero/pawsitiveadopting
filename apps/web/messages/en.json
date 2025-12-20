@@ -106,7 +106,14 @@
       "passwordsDoNotMatch": "Passwords don't match",
       "passwordLowercaseRequired": "Password must contain at least one lowercase letter",
       "passwordUppercaseRequired": "Password must contain at least one uppercase letter",
-      "passwordNumberRequired": "Password must contain at least one number"
+      "passwordNumberRequired": "Password must contain at least one number",
+      "passwordRequired": "Password is required",
+      "api": {
+        "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password",
+        "EMAIL_NOT_VERIFIED": "Email not verified. Please check your inbox.",
+        "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "User already exists. Please use another email.",
+        "VERIFICATION_EMAIL_RECENTLY_SENT": "A verification email was recently sent. Please check your inbox."
+      }
     },
     "inputs": {
       "email": {
@@ -115,7 +122,8 @@
       },
       "password": {
         "label": "Password",
-        "placeholder": "Your password goes here..."
+        "placeholder": "Your password goes here...",
+        "description": "Password must have at least 8 characters, including uppercase, lowercase, and a number."
       },
       "rememberMe": {
         "label": "Remember Me"
@@ -153,6 +161,14 @@
       "and": "and",
       "privacyPolicy": "Privacy Policy",
       "or": "OR"
+    },
+    "VerificationSent": {
+      "title": "Verification Email Sent",
+      "description": "We've sent a verification email to {email}.",
+      "description2": "Please check your inbox and click the link to verify your account.",
+      "resend": "Resend Email",
+      "verificationResent": "Verification email re-sent successfully.",
+      "resendError": "Error resending verification email. Please try again later."
     }
   }
 }

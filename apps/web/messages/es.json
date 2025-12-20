@@ -106,7 +106,14 @@
       "passwordsDoNotMatch": "Las contraseñas no coinciden",
       "passwordLowercaseRequired": "La contraseña debe contener al menos una letra minúscula",
       "passwordUppercaseRequired": "La contraseña debe contener al menos una letra mayúscula",
-      "passwordNumberRequired": "La contraseña debe contener al menos un número"
+      "passwordNumberRequired": "La contraseña debe contener al menos un número",
+      "passwordRequired": "La contraseña es obligatoria",
+      "api": {
+        "INVALID_EMAIL_OR_PASSWORD": "Correo electrónico o contraseña no válidos",
+        "EMAIL_NOT_VERIFIED": "Correo electrónico no verificado. Por favor, revisa tu bandeja de entrada.",
+        "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "El usuario ya existe. Por favor, utiliza otro correo electrónico.",
+        "VERIFICATION_EMAIL_RECENTLY_SENT": "Se ha enviado recientemente un correo de verificación. Por favor, revisa tu bandeja de entrada."
+      }
     },
     "inputs": {
       "email": {
@@ -115,7 +122,8 @@
       },
       "password": {
         "label": "Contraseña",
-        "placeholder": "Tu contraseña aquí..."
+        "placeholder": "Tu contraseña aquí...",
+        "description": "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y un número."
       },
       "rememberMe": {
         "label": "Recuérdame"
@@ -153,6 +161,14 @@
       "and": "y",
       "privacyPolicy": "Política de Privacidad",
       "or": "O"
+    },
+    "VerificationSent": {
+      "title": "Correo de Verificación Enviado",
+      "description": "Hemos enviado un correo de verificación a {email}.",
+      "description2": "Por favor, revisa tu bandeja de entrada y haz clic en el enlace para verificar tu cuenta.",
+      "resend": "Reenviar Correo",
+      "verificationResent": "Correo de verificación reenviado con éxito.",
+      "resendError": "Error al reenviar el correo de verificación. Por favor, inténtalo de nuevo más tarde."
     }
   }
 }
