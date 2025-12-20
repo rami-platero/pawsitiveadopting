@@ -4,9 +4,10 @@ import { LayoutDashboard, Settings } from "lucide-react"
 import { cn } from "@pawsitiveadopting/ui/lib/utils";
 import { buttonVariants } from "@pawsitiveadopting/ui/components/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuTrigger } from "@pawsitiveadopting/ui/components/dropdown-menu"
-import { getSession } from "@/features/auth/actions/server";
 import { getTranslations } from "next-intl/server";
 import SignOutButton from "@/features/auth/components/SignOutButton";
+import { getSession } from "@/features/auth/actions/auth.actions";
+import Avatar from "@pawsitiveadopting/ui/components/avatar";
 
 export default async function AccountNavbar() {
   const session = await getSession()
@@ -29,16 +30,7 @@ export default async function AccountNavbar() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger>
-        {session.user.image ?
-          <Image
-            src={session.user.image ?? "/assets/img/default-avatar.png"}
-            alt={session.user.name ?? "avatar"}
-            width={40}
-            height={40}
-            className="object-cover rounded-full"
-          /> :
-          <div className="w-10 h-10 bg-secondary rounded-full cursor-pointer" />
-        }
+        <Avatar image={session.user.image} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-72 mr-2">
