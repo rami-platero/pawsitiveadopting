@@ -1,41 +1,10 @@
 "use server";
+import { db } from "@/db/db";
 import { auth } from "@/shared/lib/auth";
+import { User } from "better-auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-
-type CreateUserParams = {
-  email: string;
-  password: string;
-  name: string;
-};
-
-type SignInParams = {
-  email: string;
-  password: string;
-};
-
-export const signIn = async ({ email, password }: SignInParams) => {
-  await auth.api.signInEmail({
-    body: {
-      email,
-      password,
-    },
-  });
-
-  redirect("/");
-};
-
-export const signUp = async ({ email, password, name }: CreateUserParams) => {
-  await auth.api.signUpEmail({
-    body: {
-      email,
-      password,
-      name,
-    },
-  });
-
-  redirect("/");
-};
+import { cache } from "react";
 
 export const signOut = async () => {
   await auth.api.signOut({
@@ -43,4 +12,16 @@ export const signOut = async () => {
   });
 
   redirect("/");
+};
+
+export const getSession = cache(async () => {
+  return await auth.api.getSession({
+    headers: await headers(),
+  });
+});
+
+export const getUserByEmail = async (email: User["email"]) => {
+  return await db.query.user.findFirst({
+    where: (user, { eq }) => eq(user.email, email),
+  });
 };
