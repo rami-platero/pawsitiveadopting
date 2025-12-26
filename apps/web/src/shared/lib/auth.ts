@@ -12,7 +12,8 @@ import { Role } from "@/types/user";
 import { organizationOptions } from "@/features/associations/permissions";
 import { adminOptions } from "@/features/auth/permissions";
 import { eq, sql } from "drizzle-orm";
-import { extractAuthAction } from "@/shared/utils/auth.utils";
+import { createURL, extractAuthAction, extractLocale } from "@/shared/utils/auth.utils";
+import { getTranslations } from "next-intl/server";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -25,7 +26,7 @@ export const auth = betterAuth({
   },
   emailVerification: {
     sendOnSignUp: true,
-    sendVerificationEmail: async ({ user, url }, ctx) => {
+    sendVerificationEmail: async ({ user, token }, ctx) => {
       const type = extractAuthAction(ctx?.url);
 
       if (!type)
@@ -50,7 +51,10 @@ export const auth = betterAuth({
           });
         }
 
-        if (dbUser.verificationEmailSentAt && dbUser.verificationEmailCount != 1) {
+        if (
+          dbUser.verificationEmailSentAt &&
+          dbUser.verificationEmailCount != 1
+        ) {
           const ONE_HOUR_MS = 60 * 60 * 1000;
           const now = Date.now();
           const lastSent = dbUser.verificationEmailSentAt.getTime();
@@ -73,11 +77,16 @@ export const auth = betterAuth({
         })
         .where(eq(schema.user.id, user.id));
 
+      const url = createURL({ token, email: user.email });
+
+      const locale = extractLocale(ctx?.headers);
+      const t = await getTranslations({locale, namespace: 'emails.VerifyEmail'});
+
       await resend.emails.send({
         from: env.EMAIL_SENDER_ADDRESS,
         to: user.email,
-        subject: "Hello world",
-        react: VerifyEmail({ email: user.email, url }),
+        subject: t('subject'),
+        react: VerifyEmail({ url, name: user.name, locale }),
       });
     },
     autoSignInAfterVerification: true,
