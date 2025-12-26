@@ -6,8 +6,8 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Providers = ({ children }: Props) => {
+const ServerProviders = ({ children }: Props) => {
   return <NextIntlClientProvider><Toaster position="top-center" richColors />{children}</NextIntlClientProvider>;
 };
 
-export default Providers;
+export default ServerProviders;
