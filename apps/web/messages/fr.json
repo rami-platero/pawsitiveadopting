@@ -19,6 +19,19 @@
       "getStarted": "Commencer"
     }
   },
+  "emails": {
+    "VerifyEmail": {
+      "subject": "E-mail de Vérification Pawsitive Adopting",
+      "title": "E-mail de Vérification",
+      "greeting": "Bonjour <strong>{name}</strong>,",
+      "instruction": "Merci de vous être inscrit sur <strong>Pawsitive Adopting</strong>. Nous voulons nous assurer que c'est bien vous. Pour compléter le processus de vérification de l'e-mail, veuillez cliquer sur le bouton ci-dessous :",
+      "verifyButton": "Vérifier l'E-mail",
+      "alternativeLink": "Ou copiez et collez cette URL dans un nouvel onglet de votre navigateur :",
+      "security": "Si vous n'avez pas créé de compte, aucune action supplémentaire n'est requise.",
+      "ignore": "Vous pouvez l'ignorer en toute sécurité, et votre compte ne sera pas créé. Le lien de vérification reste valide pendant 1 heure.",
+      "rightsReserved": "Tous droits réservés."
+    }
+  },
   "Metadata": {
     "Home": {
       "title": "Pawsitive Adopting",
@@ -47,6 +60,14 @@
     "NotFound": {
       "title": "Page non trouvée",
       "description": "Nous n'avons pas pu trouver la page que vous cherchiez."
+    },
+    "AuthenticationFailed": {
+      "title": "Échec de l'Authentification",
+      "description": "Ce lien ne fonctionne pas. C'est probablement parce qu'il a déjà été utilisé ou qu'il a expiré. Vérifiez si vous avez déjà terminé le processus de vérification. Sinon, vous devrez réessayer avec un nouveau lien."
+    },
+    "ConfirmEmail": {
+      "title": "Vérification de l'E-mail",
+      "description": "Pour compléter le processus de vérification de votre e-mail, veuillez cliquer sur le bouton ci-dessous."
     }
   },
   "HomePage": {
@@ -112,7 +133,8 @@
         "INVALID_EMAIL_OR_PASSWORD": "E-mail ou mot de passe invalide",
         "EMAIL_NOT_VERIFIED": "E-mail non vérifié. Veuillez vérifier votre boîte de réception.",
         "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "L'utilisateur existe déjà. Veuillez utiliser un autre e-mail.",
-        "VERIFICATION_EMAIL_RECENTLY_SENT": "Un e-mail de vérification a été envoyé récemment. Veuillez vérifier votre boîte de réception."
+        "VERIFICATION_EMAIL_RECENTLY_SENT": "Un e-mail de vérification a été envoyé récemment. Veuillez vérifier votre boîte de réception.",
+        "YOU_CAN_ONLY_SEND_A_VERIFICATION_EMAIL_TO_AN_UNVERIFIED_EMAIL": "Votre compte a déjà été vérifié."
       }
     },
     "inputs": {
@@ -169,6 +191,15 @@
       "resend": "Renvoyer l'E-mail",
       "verificationResent": "E-mail de vérification renvoyé avec succès.",
       "resendError": "Erreur lors du renvoi de l'e-mail de vérification. Veuillez réessayer plus tard."
+    },
+    "AuthenticationFailed": {
+      "title": "Échec de l'Authentification",
+      "description": "Ce lien ne fonctionne pas. C'est probablement parce qu'il a déjà été utilisé ou qu'il a expiré. Vérifiez si vous avez déjà terminé le processus de vérification. Sinon, vous devrez réessayer avec un nouveau lien."
+    },
+    "ConfirmEmail": {
+      "title": "Vérification de l'E-mail",
+      "description": "Pour compléter le processus de vérification de votre e-mail : {email}, veuillez cliquer sur le bouton ci-dessous :",
+      "verifyButton": "Vérifier l'E-mail"
     }
   }
 }

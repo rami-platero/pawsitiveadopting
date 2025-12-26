@@ -19,6 +19,19 @@
       "getStarted": "Get Started"
     }
   },
+  "emails": {
+    "VerifyEmail": {
+      "subject": "Pawsitive Adopting Verification Email",
+      "title": "Verification Email",
+      "greeting": "Hello <strong>{name}</strong>,",
+      "instruction": "Thanks for signing up to <strong>Pawsitive Adopting</strong>. We want to make sure it's really you. To complete the email verification process, please click the button below:",
+      "verifyButton": "Verify Email",
+      "alternativeLink": "Or copy and paste this URL into a new tab of your browser:",
+      "security": "If you did not create an account, no further action is required.",
+      "ignore": "You can safely ignore it, and your account will not be created. The verification link remains valid for 1 hour.",
+      "rightsReserved": "All rights reserved."
+    }
+  },
   "Metadata": {
     "Home": {
       "title": "Pawsitive Adopting",
@@ -47,6 +60,14 @@
     "NotFound": {
       "title": "Page Not Found",
       "description": "We couldn't find the page you were looking for."
+    },
+    "AuthenticationFailed": {
+      "title": "Authentication Failed",
+      "description": "This link isn't working. It's likely because it was already used or it has expired. Check to see if you've already finished the verification process. If not, you'll need to try again with a new link."
+    },
+    "ConfirmEmail": {
+      "title": "Email Verification",
+      "description": "Verify your email to complete the verification process for your account."
     }
   },
   "HomePage": {
@@ -112,7 +133,8 @@
         "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password",
         "EMAIL_NOT_VERIFIED": "Email not verified. Please check your inbox.",
         "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "User already exists. Please use another email.",
-        "VERIFICATION_EMAIL_RECENTLY_SENT": "A verification email was recently sent. Please check your inbox."
+        "VERIFICATION_EMAIL_RECENTLY_SENT": "A verification email was recently sent. Please check your inbox.",
+        "YOU_CAN_ONLY_SEND_A_VERIFICATION_EMAIL_TO_AN_UNVERIFIED_EMAIL": "Your account has already been verified."
       }
     },
     "inputs": {
@@ -169,6 +191,15 @@
       "resend": "Resend Email",
       "verificationResent": "Verification email re-sent successfully.",
       "resendError": "Error resending verification email. Please try again later."
+    },
+    "AuthenticationFailed": {
+      "title": "Authentication Failed",
+      "description": "This link isn't working. It's likely because it was already used or it has expired. Check to see if you've already finished the verification process. If not, you'll need to try again with a new link."
+    },
+    "ConfirmEmail": {
+      "title": "Email Verification",
+      "description": "To complete the verification process for your email: {email} please click the button below:",
+      "verifyButton": "Verify Email"
     }
   }
 }

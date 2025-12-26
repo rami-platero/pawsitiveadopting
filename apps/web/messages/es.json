@@ -19,6 +19,19 @@
       "getStarted": "Comenzar"
     }
   },
+  "emails": {
+    "VerifyEmail": {
+      "subject": "Correo de Verificación Pawsitive Adopting",
+      "title": "Correo de Verificación",
+      "greeting": "Hola <strong>{name}</strong>,",
+      "instruction": "Gracias por registrarte en <strong>Pawsitive Adopting</strong>. Queremos asegurarnos de que eres tú. Para completar el proceso de verificación de correo electrónico, por favor haz clic en el botón de abajo:",
+      "verifyButton": "Verificar Correo Electrónico",
+      "alternativeLink": "O copia y pega esta URL en una nueva pestaña de tu navegador:",
+      "security": "Si no creaste una cuenta, no se requiere ninguna acción adicional.",
+      "ignore": "Puedes ignorarlo con seguridad, y tu cuenta no será creada. El enlace de verificación permanece válido por 1 hora.",
+      "rightsReserved": "Todos los derechos reservados."
+    }
+  },
   "Metadata": {
     "Home": {
       "title": "Pawsitive Adopting",
@@ -47,6 +60,14 @@
     "NotFound": {
       "title": "Página no encontrada",
       "description": "No pudimos encontrar la página que estabas buscando."
+    },
+    "AuthenticationFailed": {
+      "title": "Autenticación Fallida",
+      "description": "Este enlace no funciona. Probablemente porque ya fue utilizado o ha expirado. Verifica si ya has completado el proceso de verificación. Si no, necesitarás intentarlo de nuevo con un nuevo enlace."
+    },
+    "ConfirmEmail": {
+      "title": "Verificación de Correo Electrónico",
+      "description": "Verifica tu correo electrónico para completar el proceso de verificación de tu cuenta."
     }
   },
   "HomePage": {
@@ -112,7 +133,8 @@
         "INVALID_EMAIL_OR_PASSWORD": "Correo electrónico o contraseña no válidos",
         "EMAIL_NOT_VERIFIED": "Correo electrónico no verificado. Por favor, revisa tu bandeja de entrada.",
         "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "El usuario ya existe. Por favor, utiliza otro correo electrónico.",
-        "VERIFICATION_EMAIL_RECENTLY_SENT": "Se ha enviado recientemente un correo de verificación. Por favor, revisa tu bandeja de entrada."
+        "VERIFICATION_EMAIL_RECENTLY_SENT": "Se ha enviado recientemente un correo de verificación. Por favor, revisa tu bandeja de entrada.",
+        "YOU_CAN_ONLY_SEND_A_VERIFICATION_EMAIL_TO_AN_UNVERIFIED_EMAIL": "Tu cuenta ya ha sido verificada."
       }
     },
     "inputs": {
@@ -169,6 +191,15 @@
       "resend": "Reenviar Correo",
       "verificationResent": "Correo de verificación reenviado con éxito.",
       "resendError": "Error al reenviar el correo de verificación. Por favor, inténtalo de nuevo más tarde."
+    },
+    "AuthenticationFailed": {
+      "title": "Autenticación Fallida",
+      "description": "Este enlace no funciona. Probablemente porque ya fue utilizado o ha expirado. Verifica si ya has completado el proceso de verificación. Si no, necesitarás intentarlo de nuevo con un nuevo enlace."
+    },
+    "ConfirmEmail": {
+      "title": "Verificación de Correo Electrónico",
+      "description": "Para completar el proceso de verificación de tu correo electrónico: {email} por favor haz clic en el botón de abajo:",
+      "verifyButton": "Verificar Correo Electrónico"
     }
   }
 }
