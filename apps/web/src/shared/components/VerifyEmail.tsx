@@ -1,8 +1,3 @@
-type Props = {
-    email: string
-    url: string
-}
-
 import {
   Html,
   Head,
@@ -11,83 +6,107 @@ import {
   Section,
   Text,
   Button,
+  Img,
+  Link,
   Hr,
   Tailwind,
 } from '@react-email/components';
+import { getTranslations } from 'next-intl/server';
 
-const VerifyEmail = ({email, url}: Props) => {
+type Props = {
+  url: string;
+  name: string;
+  locale: string
+};
+
+const VerifyEmail = async ({ url, name, locale }: Props) => {
+
+  const t = await getTranslations({locale, namespace: 'emails.VerifyEmail'})
 
   return (
-    <Html lang="en" dir="ltr">
+    <Html lang={locale} dir="ltr">
+      <Head />
       <Tailwind>
-        <Head />
-        <Body className="bg-gray-100 font-sans py-[40px]">
-          <Container className="bg-white rounded-[8px] shadow-sm max-w-[600px] mx-auto p-[40px]">
-            {/* Header */}
-            <Section className="text-center mb-[32px]">
-              <Text className="text-[32px] font-bold text-gray-900 m-0 mb-[8px]">
-                Verify Your Email
-              </Text>
-              <Text className="text-[16px] text-gray-600 m-0">
-                Please confirm your email address to complete your account setup
+        <Body className="bg-white my-auto mx-auto font-sans px-2">
+          <Container className="border-separate border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] max-w-xl">
+
+            {/* Logo Section */}
+            <Section className="mt-[32px]">
+              <Img
+                src="https://pawsitiveadopting.vercel.app/assets/logo.png"
+                width="40"
+                height="40"
+                alt="Pawsitive Adopting"
+                className="my-0 mx-auto"
+              />
+            </Section>
+
+            {/* Main Header */}
+            <Section className="text-center mt-[32px] mb-[32px]">
+              <Text className="text-[24px] font-normal text-black m-0 leading-[1.3]">
+                {t('title')}
               </Text>
             </Section>
 
-            {/* Main Content */}
-            <Section className="mb-[32px]">
-              <Text className="text-[16px] text-gray-800 mb-[16px] leading-[24px]">
-                Hi there,
+            {/* Greeting & Instruction */}
+            <Section>
+              <Text className="text-[14px] text-black leading-[24px]">
+                {t.rich('greeting', {
+                  name,
+                  strong: (chunks) => <strong>{chunks}</strong>
+                })}
               </Text>
-              <Text className="text-[16px] text-gray-800 mb-[16px] leading-[24px]">
-                Thanks for signing up! We need to verify your email address <strong>{email}</strong> to ensure the security of your account.
-              </Text>
-              <Text className="text-[16px] text-gray-800 mb-[24px] leading-[24px]">
-                Click the button below to verify your email address:
+              <Text className="text-[14px] text-black leading-[24px]">
+                {t.rich('instruction', {
+                  strong: (chunks) => <strong>{chunks}</strong>
+                })}
               </Text>
             </Section>
 
-            {/* Verification Button */}
+            {/* Verify Button */}
             <Section className="text-center mb-[32px]">
               <Button
                 href={url}
-                className="bg-blue-600 text-white px-[32px] py-[16px] rounded-[8px] text-[16px] font-semibold no-underline box-border hover:bg-blue-700"
+                className="bg-[#241511] text-white px-[24px] py-[12px] rounded-[5px] text-[12px] font-semibold no-underline text-center uppercase"
               >
-                Verify Email Address
+                {t('verifyButton')}
               </Button>
             </Section>
 
-            {/* Alternative Link */}
+            {/* Alternative Link Section */}
             <Section className="mb-[32px]">
-              <Text className="text-[14px] text-gray-600 leading-[20px]">
-                If the button doesn't work, you can copy and paste this link into your browser:
+              <Text className="text-[14px] text-[#666666] leading-[24px]">
+                {t('alternativeLink')}
               </Text>
-              <Text className="text-[14px] text-blue-600 break-all">
+              <Link
+                href={url}
+                className="text-[14px] text-[#0070f3] underline break-all"
+              >
                 {url}
-              </Text>
+              </Link>
             </Section>
 
-            <Hr className="border-gray-200 my-[24px]" />
+            <Hr className="border-[#eaeaea] my-[26px] mx-0 w-full" />
 
-            {/* Security Notice */}
-            <Section className="mb-[24px]">
-              <Text className="text-[14px] text-gray-600 leading-[20px]">
-                <strong>Security note:</strong> This verification link will expire in 24 hours for your security. If you didn't create an account, you can safely ignore this email.
+            {/* SECURITY / IGNORE SECTION */}
+            <Section className="mb-[32px]">
+              <Text className="text-[14px] text-[#666666] leading-[24px]">
+                <strong>{t('security')}</strong>
+                <br />
+                {t('ignore')}
               </Text>
             </Section>
 
             {/* Footer */}
-            <Section className="text-center">
-              <Text className="text-[12px] text-gray-500 m-0 mb-[8px]">
-                © {new Date().getFullYear()} Your Company Name. All rights reserved.
-              </Text>
-              <Text className="text-[12px] text-gray-500 m-0 mb-[4px]">
-                123 Business Street, Suite 100
-              </Text>
-              <Text className="text-[12px] text-gray-500 m-0 mb-[8px]">
-                San Juan, Argentina
-              </Text>
-              <Text className="text-[12px] text-gray-500 m-0">
-                <a href="#" className="text-gray-500 underline">Unsubscribe</a>
+            <Section>
+              <Text className="text-[12px] text-[#666666] leading-[24px]">
+                © {new Date().getFullYear()} Pawsitive Adopting. {t("rightsReserved")}
+                <br />
+                123 Business Street, San Juan, Argentina
+                <br />
+                {/* <Link href="#" className="text-[#666666] underline">
+                  Unsubscribe
+                </Link> */}
               </Text>
             </Section>
           </Container>
