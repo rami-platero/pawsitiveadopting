@@ -128,6 +128,6 @@
 
 @layer components {
   .full-screen-center {
-    @apply min-h-[calc(100vh-var(--navbar-h)-1px)] flex flex-col items-center justify-center;
+    @apply min-h-[calc(100vh-var(--navbar-h)-var(--navbar-h)-1px)] flex flex-col items-center justify-center;
   }
 }
