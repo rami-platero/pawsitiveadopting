@@ -7,15 +7,25 @@ import postgres from "postgres";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { NeonHttpDatabase } from "drizzle-orm/neon-http";
 
+declare global {
+  // eslint-disable-next-line no-var
+  var postgresSqlClient: postgres.Sql | undefined;
+}
+
 let db: PostgresJsDatabase<typeof schema> | NeonHttpDatabase<typeof schema>;
 
-if (process.env.NODE_ENV == "development") {
-  const client = postgres(env.DATABASE_URL);
+if (process.env.NODE_ENV === "development") {
+  const client = global.postgresSqlClient || postgres(env.DATABASE_URL, { 
+    max: 1 
+  });
+
+  if (process.env.NODE_ENV !== "production") {
+    global.postgresSqlClient = client;
+  }
 
   db = drizzlePg({ client, schema });
 } else {
   const client = neon(env.DATABASE_URL);
-
   db = drizzle({ client, schema });
 }
 
