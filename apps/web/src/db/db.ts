@@ -19,9 +19,7 @@ if (process.env.NODE_ENV === "development") {
     max: 1 
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    global.postgresSqlClient = client;
-  }
+  global.postgresSqlClient = client;
 
   db = drizzlePg({ client, schema });
 } else {
