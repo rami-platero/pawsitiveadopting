@@ -1,4 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
+import { NuqsAdapter } from "nuqs/adapters/next";
 import React from "react";
 import { Toaster } from "sonner";
 
@@ -7,7 +8,7 @@ type Props = {
 };
 
 const ServerProviders = ({ children }: Props) => {
-  return <NextIntlClientProvider><Toaster position="top-center" richColors />{children}</NextIntlClientProvider>;
+  return <NextIntlClientProvider><Toaster position="top-center" richColors /><NuqsAdapter>{children}</NuqsAdapter></NextIntlClientProvider>;
 };
 
 export default ServerProviders;
