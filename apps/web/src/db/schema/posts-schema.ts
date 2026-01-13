@@ -8,9 +8,11 @@ import {
   decimal,
   jsonb,
   pgEnum,
-  primaryKey,
 } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { association, user } from "./auth-schema";
+
+// ENUMS
 
 export const animalTypeEnum = pgEnum("animal_type", ["cat", "dog"]);
 export const statusEnum = pgEnum("status", [
@@ -19,7 +21,7 @@ export const statusEnum = pgEnum("status", [
   "adopted",
   "removed",
 ]);
-export const sexEnum = pgEnum("sex", ["male", "female", "unknown"]);
+export const sexEnum = pgEnum("sex", ["male", "female"]);
 export const ageGroupEnum = pgEnum("age_group", [
   "puppy/kitten",
   "young",
@@ -45,7 +47,8 @@ export const barkingLevelEnum = pgEnum("barking_level", [
 ]);
 export const mediaTypeEnum = pgEnum("media_type", ["photo", "video"]);
 
-// ADOPTION POSTS 
+// TABLES
+
 export const adoptionPost = pgTable("adoption_post", {
   id: serial("id").primaryKey(),
   animalType: animalTypeEnum("animal_type").notNull(),
@@ -61,7 +64,8 @@ export const adoptionPost = pgTable("adoption_post", {
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
 
-// ANIMAL DETAILS 
+// ANIMAL DETAILS
+
 export const animalDetails = pgTable("animal_details", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
@@ -80,7 +84,8 @@ export const animalDetails = pgTable("animal_details", {
   coatColorSecondary: text("coat_color_secondary"),
 });
 
-// HEALTH INFO 
+// HEALTH INFO
+
 export const healthInfo = pgTable("health_info", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
@@ -96,7 +101,8 @@ export const healthInfo = pgTable("health_info", {
   disability: text("disability"),
 });
 
-// TEMPERAMENT 
+// TEMPERAMENT
+
 export const temperament = pgTable("temperament", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
@@ -115,7 +121,8 @@ export const temperament = pgTable("temperament", {
   fears: text("fears").array(),
 });
 
-// ADOPTION REQUIREMENTS 
+// ADOPTION REQUIREMENTS
+
 export const adoptionRequirements = pgTable("adoption_requirements", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
@@ -134,6 +141,7 @@ export const adoptionRequirements = pgTable("adoption_requirements", {
 });
 
 // MEDIA
+
 export const media = pgTable("media", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
@@ -145,3 +153,142 @@ export const media = pgTable("media", {
   isMain: boolean("is_main").default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+// RELATIONS
+
+export const adoptionPostRelations = relations(
+  adoptionPost,
+  ({ one, many }) => ({
+    association: one(association, {
+      fields: [adoptionPost.associationId],
+      references: [association.id],
+    }),
+    user: one(user, {
+      fields: [adoptionPost.userId],
+      references: [user.id],
+    }),
+    animalDetails: one(animalDetails, {
+      fields: [adoptionPost.id],
+      references: [animalDetails.adoptionPostId],
+    }),
+    healthInfo: one(healthInfo, {
+      fields: [adoptionPost.id],
+      references: [healthInfo.adoptionPostId],
+    }),
+    temperament: one(temperament, {
+      fields: [adoptionPost.id],
+      references: [temperament.adoptionPostId],
+    }),
+    adoptionRequirements: one(adoptionRequirements, {
+      fields: [adoptionPost.id],
+      references: [adoptionRequirements.adoptionPostId],
+    }),
+    media: many(media),
+  })
+);
+
+export const animalDetailsRelations = relations(animalDetails, ({ one }) => ({
+  adoptionPost: one(adoptionPost, {
+    fields: [animalDetails.adoptionPostId],
+    references: [adoptionPost.id],
+  }),
+}));
+
+export const healthInfoRelations = relations(healthInfo, ({ one }) => ({
+  adoptionPost: one(adoptionPost, {
+    fields: [healthInfo.adoptionPostId],
+    references: [adoptionPost.id],
+  }),
+}));
+
+export const temperamentRelations = relations(temperament, ({ one }) => ({
+  adoptionPost: one(adoptionPost, {
+    fields: [temperament.adoptionPostId],
+    references: [adoptionPost.id],
+  }),
+}));
+
+export const adoptionRequirementsRelations = relations(
+  adoptionRequirements,
+  ({ one }) => ({
+    adoptionPost: one(adoptionPost, {
+      fields: [adoptionRequirements.adoptionPostId],
+      references: [adoptionPost.id],
+    }),
+  })
+);
+
+export const mediaRelations = relations(media, ({ one }) => ({
+  adoptionPost: one(adoptionPost, {
+    fields: [media.adoptionPostId],
+    references: [adoptionPost.id],
+  }),
+}));
+
+// TYPES
+
+export type AdoptionPost = typeof adoptionPost.$inferSelect;
+export type CreateAdoptionPostData = typeof adoptionPost.$inferInsert;
+export type UpdateAdoptionPostData = Partial<
+  Omit<CreateAdoptionPostData, "id" | "datePosted" | "lastUpdated">
+>;
+
+export type AnimalDetails = typeof animalDetails.$inferSelect;
+export type CreateAnimalDetailsData = typeof animalDetails.$inferInsert;
+export type UpdateAnimalDetailsData = Partial<
+  Omit<CreateAnimalDetailsData, "id" | "adoptionPostId">
+>;
+
+export type HealthInfo = typeof healthInfo.$inferSelect;
+export type CreateHealthInfoData = typeof healthInfo.$inferInsert;
+export type UpdateHealthInfoData = Partial<
+  Omit<CreateHealthInfoData, "id" | "adoptionPostId">
+>;
+
+export type Temperament = typeof temperament.$inferSelect;
+export type CreateTemperamentData = typeof temperament.$inferInsert;
+export type UpdateTemperamentData = Partial<
+  Omit<CreateTemperamentData, "id" | "adoptionPostId">
+>;
+
+export type AdoptionRequirements = typeof adoptionRequirements.$inferSelect;
+export type CreateAdoptionRequirementsData =
+  typeof adoptionRequirements.$inferInsert;
+export type UpdateAdoptionRequirementsData = Partial<
+  Omit<CreateAdoptionRequirementsData, "id" | "adoptionPostId">
+>;
+
+export type Media = typeof media.$inferSelect;
+export type CreateMediaData = typeof media.$inferInsert;
+export type UpdateMediaData = Partial<
+  Omit<CreateMediaData, "id" | "adoptionPostId" | "createdAt">
+>;
+
+// ENUM TYPES
+
+export type AnimalType = (typeof animalTypeEnum.enumValues)[number];
+// Result: "cat" | "dog"
+
+export type Status = (typeof statusEnum.enumValues)[number];
+// Result: "available" | "pending" | "adopted" | "removed"
+
+export type Sex = (typeof sexEnum.enumValues)[number];
+// Result: "male" | "female" | "unknown"
+
+export type AgeGroup = (typeof ageGroupEnum.enumValues)[number];
+// Result: "puppy/kitten" | "young" | "adult" | "senior"
+
+export type Size = (typeof sizeEnum.enumValues)[number];
+// Result: "small" | "medium" | "large" | "giant"
+
+export type CoatLength = (typeof coatLengthEnum.enumValues)[number];
+// Result: "hairless" | "short" | "medium" | "long"
+
+export type EnergyLevel = (typeof energyLevelEnum.enumValues)[number];
+// Result: "low" | "medium" | "high"
+
+export type BarkingLevel = (typeof barkingLevelEnum.enumValues)[number];
+// Result: "low" | "medium" | "high"
+
+export type MediaType = (typeof mediaTypeEnum.enumValues)[number];
+// Result: "photo" | "video"

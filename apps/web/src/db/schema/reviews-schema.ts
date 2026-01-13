@@ -1,5 +1,8 @@
 import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { association, user } from "./auth-schema";
+
+// TABLES
 
 export const review = pgTable("review", {
   id: text("id").primaryKey(),
@@ -12,3 +15,24 @@ export const review = pgTable("review", {
   datePosted: timestamp("date_posted").defaultNow(),
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
+
+// RELATIONS
+
+export const reviewRelations = relations(review, ({ one }) => ({
+  user: one(user, {
+    fields: [review.userId],
+    references: [user.id],
+  }),
+  association: one(association, {
+    fields: [review.associationId],
+    references: [association.id],
+  }),
+}));
+
+// TYPES
+
+export type Review = typeof review.$inferSelect;
+export type CreateReviewData = typeof review.$inferInsert;
+export type UpdateReviewData = Partial<
+  Omit<CreateReviewData, "id" | "userId" | "datePosted" | "lastUpdated">
+>;

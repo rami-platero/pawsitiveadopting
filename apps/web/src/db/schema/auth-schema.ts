@@ -1,6 +1,18 @@
-import { pgTable, text, timestamp, boolean, pgEnum, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  timestamp,
+  boolean,
+  pgEnum,
+  integer,
+} from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+
+// ENUMS
 
 export const rolesEnum = pgEnum("role", ["admin", "regular"]);
+
+// TABLES
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -10,7 +22,9 @@ export const user = pgTable("user", {
     .$defaultFn(() => false)
     .notNull(),
   verificationEmailSentAt: timestamp("verification_email_sent_at"),
-  verificationEmailCount: integer("verification_email_count").default(0).notNull(),
+  verificationEmailCount: integer("verification_email_count")
+    .default(0)
+    .notNull(),
   image: text("image"),
   createdAt: timestamp("created_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
@@ -86,6 +100,8 @@ export const memberRolesEnum = pgEnum("memberRole", [
   "pet_manager",
 ]);
 
+// TABLES
+
 export const member = pgTable("member", {
   id: text("id").primaryKey(),
   associationId: text("association_id")
@@ -111,3 +127,94 @@ export const invitation = pgTable("invitation", {
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
 });
+
+// RELATIONS
+
+export const userRelations = relations(user, ({ many }) => ({
+  sessions: many(session),
+  accounts: many(account),
+  members: many(member),
+  invitations: many(invitation),
+}));
+
+export const sessionRelations = relations(session, ({ one }) => ({
+  user: one(user, {
+    fields: [session.userId],
+    references: [user.id],
+  }),
+}));
+
+export const accountRelations = relations(account, ({ one }) => ({
+  user: one(user, {
+    fields: [account.userId],
+    references: [user.id],
+  }),
+}));
+
+export const associationRelations = relations(association, ({ many }) => ({
+  members: many(member),
+  invitations: many(invitation),
+}));
+
+export const memberRelations = relations(member, ({ one }) => ({
+  user: one(user, {
+    fields: [member.userId],
+    references: [user.id],
+  }),
+  association: one(association, {
+    fields: [member.associationId],
+    references: [association.id],
+  }),
+}));
+
+export const invitationRelations = relations(invitation, ({ one }) => ({
+  association: one(association, {
+    fields: [invitation.associationId],
+    references: [association.id],
+  }),
+  inviter: one(user, {
+    fields: [invitation.inviterId],
+    references: [user.id],
+  }),
+}));
+
+// TYPES
+
+export type User = typeof user.$inferSelect;
+export type CreateUserData = typeof user.$inferInsert;
+export type UpdateUserData = Partial<
+  Omit<CreateUserData, "id" | "createdAt" | "updatedAt">
+>;
+
+export type Session = typeof session.$inferSelect;
+export type CreateSessionData = typeof session.$inferInsert;
+export type UpdateSessionData = Partial<
+  Omit<CreateSessionData, "id" | "createdAt" | "updatedAt">
+>;
+
+export type Account = typeof account.$inferSelect;
+export type CreateAccountData = typeof account.$inferInsert;
+export type UpdateAccountData = Partial<
+  Omit<CreateAccountData, "id" | "createdAt" | "updatedAt">
+>;
+
+export type Verification = typeof verification.$inferSelect;
+export type CreateVerificationData = typeof verification.$inferInsert;
+export type UpdateVerificationData = Partial<
+  Omit<CreateVerificationData, "id" | "createdAt" | "updatedAt">
+>;
+
+export type Association = typeof association.$inferSelect;
+export type CreateAssociationData = typeof association.$inferInsert;
+export type UpdateAssociationData = Partial<
+  Omit<CreateAssociationData, "id" | "createdAt">
+>;
+
+export type Member = typeof member.$inferSelect;
+export type CreateMemberData = typeof member.$inferInsert;
+
+export type Invitation = typeof invitation.$inferSelect;
+export type CreateInvitationData = typeof invitation.$inferInsert;
+export type UpdateInvitationData = Partial<
+  Omit<CreateInvitationData, "id" | "inviterId">
+>;
