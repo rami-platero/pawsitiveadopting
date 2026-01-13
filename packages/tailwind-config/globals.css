@@ -131,3 +131,31 @@
     @apply min-h-[calc(100vh-var(--navbar-h)-var(--navbar-h)-1px)] flex flex-col items-center justify-center;
   }
 }
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@layer utilities {
+  .lightui-shimmer {
+    background-color: #d8d8d8;
+    
+    background-image: linear-gradient(
+      to right,
+      #d8d8d8 0%,
+      #bdbdbd 20%,
+      #d8d8d8 40%,
+      #d8d8d8 100%
+    );
+    
+    background-repeat: no-repeat;
+    background-size: 800px 1000px;
+    
+    animation: shimmer 1s linear infinite forwards;
+  }
+}
