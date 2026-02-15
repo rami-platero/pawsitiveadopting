@@ -1,8 +1,7 @@
-"use client"
-import { AdoptionPostWithMedia } from '@/features/pets/data-access/getPosts';
+import { AdoptionPostExtended } from '@/features/pets/data-access/getPosts';
 import PostItem from './post-item';
 
-export default function PostsList({ posts }: { posts: AdoptionPostWithMedia[] }) {
+export default async function PostsList({ posts }: { posts: AdoptionPostExtended[] }) {
 
     if (posts.length === 0) {
         return (
@@ -13,9 +12,9 @@ export default function PostsList({ posts }: { posts: AdoptionPostWithMedia[] })
     }
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => {
-                return <PostItem key={post.id} post={post}/>
+                return <PostItem key={post.id} id={post.id} name={post.name} media={post.media} ageGroup={post.animalDetails.ageGroup} sex={post.animalDetails.sex} />
             })}
         </div>
     );

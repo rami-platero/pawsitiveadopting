@@ -1,27 +1,35 @@
-import { AdoptionPostWithMedia } from '@/features/pets/data-access/getPosts';
-import { Heart } from 'lucide-react';
+import { Media, } from '@/db/schema';
+import { AdoptionPostExtended } from '@/features/pets/data-access/getPosts';
+import { Heart, Calendar } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link'
 import React from 'react'
+import { BsGenderMale } from 'react-icons/bs';
 
 type Props = {
-    post: AdoptionPostWithMedia
+    id: AdoptionPostExtended['id']
+    name: AdoptionPostExtended['name']
+    media: Media[]
+    ageGroup: AdoptionPostExtended['animalDetails']['ageGroup']
+    sex: AdoptionPostExtended['animalDetails']['sex']
 }
 
-const PostItem = ({ post }: Props) => {
-    const mainImage = post.media.find((m) => m.isMain)?.url || post.media[0]?.url;
+const PostItem = async ({ id, name, media, ageGroup, sex }: Props) => {
+    const t = await getTranslations('Pets.PostItem');
+    const mainImage = media.find((m) => m.isMain)?.url || media[0]?.url;
 
     return (
         <Link
-            key={post.id}
-            href={`/pet/${post.id}`}
-            className="group block overflow-hidden rounded-lg border bg-card transition-all hover:shadow-lg hover:-translate-y-1"
+            key={id}
+            href={`/pet/${id}`}
+            className="group block overflow-hidden rounded-lg border bg-card transition-all h-full flex-col"
         >
-            <div className="relative aspect-square overflow-hidden bg-muted">
+            <div className="relative aspect-square overflow-hidden bg-muted shrink-0">
                 {mainImage ? (
                     <Image
                         src={mainImage}
-                        alt={post.name || 'Pet photo'}
+                        alt={name || 'Pet photo'}
                         fill
                         className="object-cover transition-transform group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
@@ -39,15 +47,19 @@ const PostItem = ({ post }: Props) => {
                 </button>
             </div>
 
-            <div className="p-4 space-y-2">
-                <h3 className="font-semibold text-lg line-clamp-1">{post.name || 'Unknown'}</h3>
+            <div className="p-4 space-y-3 grow flex flex-col">
+                <h3 className="font-bold text-xl line-clamp-1">{name || 'Unknown'}</h3>
 
-                {post.description && (
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                        {post.description}
-                    </p>
-                )}
-
+                <div className="flex items-center gap-4 mt-auto">
+                    <div className="flex items-center gap-1.5">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">{t("ageGroup." + ageGroup || 'unknown')}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <BsGenderMale className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">{t("sex." + sex || 'unknown')}</span>
+                    </div>
+                </div>
             </div>
         </Link>
     )
