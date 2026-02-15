@@ -201,5 +201,21 @@
       "description": "To complete the verification process for your email: {email} please click the button below:",
       "verifyButton": "Verify Email"
     }
+  },
+  "Pets": {
+    "PostItem": {
+      "ageGroup": {
+        "puppy/kitten": "Puppy/Kitten",
+        "young": "Young",
+        "adult": "Adult",
+        "senior": "Senior",
+        "unknown": "Unknown"
+      },
+      "sex": {
+        "male": "Male",
+        "female": "Female",
+        "unknown": "Unknown"
+      }
+    }
   }
 }

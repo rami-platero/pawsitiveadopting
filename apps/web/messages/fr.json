@@ -201,5 +201,21 @@
       "description": "Pour compléter le processus de vérification de votre e-mail : {email}, veuillez cliquer sur le bouton ci-dessous :",
       "verifyButton": "Vérifier l'E-mail"
     }
+  },
+  "Pets": {
+    "PostItem": {
+      "ageGroup": {
+        "puppy/kitten": "Chiot/Chaton",
+        "young": "Jeune",
+        "adult": "Adulte",
+        "senior": "Senior",
+        "unknown": "Inconnu"
+      },
+      "sex": {
+        "male": "Mâle",
+        "female": "Femelle",
+        "unknown": "Inconnu"
+      }
+    }
   }
 }
