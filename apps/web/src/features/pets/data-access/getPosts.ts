@@ -2,6 +2,7 @@ import { db } from "@/db/db";
 import {
   type AdoptionPost,
   adoptionPost,
+  AnimalDetails,
   animalDetails,
   Media,
 } from "@/db/schema/posts-schema";
@@ -9,7 +10,7 @@ import { buildConditions } from "@/features/pets/data-access/getFilters";
 import { ParsedSearchParams } from "@/features/pets/schema/searchParams.schema";
 import { asc, count, desc, eq, inArray } from "drizzle-orm";
 
-export type AdoptionPostWithMedia = AdoptionPost & { media: Media[] };
+export type AdoptionPostExtended = AdoptionPost & { media: Media[], animalDetails: AnimalDetails };
 
 const LIMIT = 10;
 
@@ -63,7 +64,6 @@ export async function getFilteredPosts(filters: ParsedSearchParams) {
     with: {
       animalDetails: true,
       media: true,
-      adoptionRequirements: true,
     },
     orderBy: orderByCondition
   });
