@@ -38,7 +38,7 @@ export default async function BrowsePage({ searchParams }: Props) {
         <p className="text-muted-foreground">Find your perfect companion</p>
       </div>
 
-      <div className='lg:flex gap-4'>
+      <div className='grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-4'>
         <Filters availableFilters={availableFilters} />
         <Suspense key={JSON.stringify(parsedParams)} fallback={<PostsGridSkeleton />}>
           <FilteredPostsResults filters={parsedParams} />

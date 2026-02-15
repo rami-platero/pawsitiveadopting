@@ -3,8 +3,10 @@ import CheckboxFilter from '@/shared/components/filters/checkbox-filter'
 import { Button } from '@pawsitiveadopting/ui/components/button'
 import { Label } from '@pawsitiveadopting/ui/components/label'
 import { RadioGroup, RadioGroupItem } from '@pawsitiveadopting/ui/components/radio-group'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@pawsitiveadopting/ui/components/sheet'
 import { parseAsArrayOf, parseAsString, useQueryStates } from 'nuqs'
-import React from 'react'
+import React, { useState } from 'react'
+import { Menu } from 'lucide-react'
 
 type FacetOption = {
     value: string;
@@ -28,6 +30,7 @@ const ANIMAL_TYPE_OPTIONS = [
 ]
 
 const Filters = ({ availableFilters }: Props) => {
+    const [open, setOpen] = useState(false)
 
     const [filters, setFilters] = useQueryStates({
         type: parseAsArrayOf(parseAsString).withDefault([]).withOptions({ shallow: false, throttleMs: 500 }),
@@ -67,8 +70,8 @@ const Filters = ({ availableFilters }: Props) => {
         count: item.count
     }))
 
-    return (
-        <div className='max-w-xs w-full lg:w-80 shrink-0 space-y-2'>
+    const FiltersContent = () => (
+        <>
             <div className='flex justify-between items-center'>
                 <h2 className='font-medium text-lg'>Filters</h2>
                 <Button variant='ghost' size='sm' onClick={() => setFilters(null)}>
@@ -110,7 +113,32 @@ const Filters = ({ availableFilters }: Props) => {
                 selectedValues={filters.age}
                 onToggle={(value) => toggleFilter('age', value)}
             />
-        </div>
+        </>
+    )
+
+    return (
+        <>
+            <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger asChild className='lg:hidden'>
+                    <Button variant='outline' size='sm' className='gap-2'>
+                        <Menu className='size-4' />
+                        Filters
+                    </Button>
+                </SheetTrigger>
+                <SheetContent side='left' className='w-80 space-y-2'>
+                    <SheetHeader>
+                        <SheetTitle>Filters</SheetTitle>
+                    </SheetHeader>
+                    <div className='space-y-2 overflow-y-auto max-h-[calc(100vh-100px)] px-4'>
+                        <FiltersContent />
+                    </div>
+                </SheetContent>
+            </Sheet>
+
+            <div className='hidden lg:block max-w-xs w-full shrink-0 space-y-2'>
+                <FiltersContent />
+            </div>
+        </>
     )
 }
 
