@@ -11,10 +11,9 @@ import { pushInArrayCondition } from "@/features/pets/utils/filters.helper";
 
 export type FilterParams = {
   type?: string[];
-  breed?: string[];
   size?: string[];
   color?: string[];
-  sex?: Sex[];
+  sex?: string;
   age?: AgeGroup[];
 };
 
@@ -25,44 +24,57 @@ export type FacetOption = {
 
 export function buildConditions(
   params: FilterParams,
-  excludeKey?: keyof FilterParams
+  excludeKey?: keyof FilterParams,
 ) {
   const conditions = [];
 
   conditions.push(eq(adoptionPost.status, "available"));
-  pushInArrayCondition(params.breed,excludeKey,"breed",animalDetails.breed,conditions);
-  pushInArrayCondition(params.type,excludeKey,"type",adoptionPost.animalType,conditions);
-  pushInArrayCondition(params.age,excludeKey,"age",animalDetails.ageGroup,conditions);
-  pushInArrayCondition(params.sex,excludeKey,"sex",animalDetails.sex,conditions);
+  pushInArrayCondition(
+    params.type,
+    excludeKey,
+    "type",
+    adoptionPost.animalType,
+    conditions,
+  );
+  pushInArrayCondition(
+    params.age,
+    excludeKey,
+    "age",
+    animalDetails.ageGroup,
+    conditions,
+  );
+  pushInArrayCondition(
+    params.color,
+    excludeKey,
+    "color",
+    animalDetails.coatColorPrimary,
+    conditions,
+  );
+
+  if (params.sex && excludeKey !== "sex") {
+    conditions.push(eq(animalDetails.sex, params.sex as Sex));
+  }
 
   return and(...conditions);
 }
 
 export async function getAvailableFilters(params: FilterParams) {
-  const [breeds, colors, temperaments, ageGroups] = await Promise.all([
-    // BREEDS (with Counts)
+  const [sexOptions, colors, temperaments, ageGroups] = await Promise.all([
+    // SEX (with Counts)
     db
       .select({
-        value: animalDetails.breed,
-        count: count()
+        value: animalDetails.sex,
+        count: count(),
       })
       .from(animalDetails)
       .innerJoin(
         adoptionPost,
-        eq(animalDetails.adoptionPostId, adoptionPost.id)
+        eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
-      .where(
-        and(
-          buildConditions(params, "breed"),
-          not(eq(animalDetails.breed, ""))
-        )
-      )
-      .groupBy(animalDetails.breed) 
-      .orderBy(desc(count()))
-      .then(
-        (rows) =>
-          rows.filter((r) => r.value !== null) as FacetOption[]
-      ),
+      .where(buildConditions(params, "sex"))
+      .groupBy(animalDetails.sex)
+      .orderBy(asc(animalDetails.sex))
+      .then((rows) => rows.filter((r) => r.value !== null) as FacetOption[]),
 
     // COLORS (with Counts)
     db
@@ -73,7 +85,7 @@ export async function getAvailableFilters(params: FilterParams) {
       .from(animalDetails)
       .innerJoin(
         adoptionPost,
-        eq(animalDetails.adoptionPostId, adoptionPost.id)
+        eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
       .where(buildConditions(params, "color"))
       .groupBy(animalDetails.coatColorPrimary)
@@ -90,7 +102,7 @@ export async function getAvailableFilters(params: FilterParams) {
       .innerJoin(adoptionPost, eq(temperament.adoptionPostId, adoptionPost.id))
       .innerJoin(
         animalDetails,
-        eq(animalDetails.adoptionPostId, adoptionPost.id)
+        eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
       .where(buildConditions(params))
       .groupBy(sql`unnest(${temperament.temperamentTags})`)
@@ -106,7 +118,7 @@ export async function getAvailableFilters(params: FilterParams) {
       .from(animalDetails)
       .innerJoin(
         adoptionPost,
-        eq(animalDetails.adoptionPostId, adoptionPost.id)
+        eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
       .where(buildConditions(params, "age"))
       .groupBy(animalDetails.ageGroup)
@@ -115,9 +127,9 @@ export async function getAvailableFilters(params: FilterParams) {
   ]);
 
   return {
-    breeds,
+    sexOptions,
     colors,
     temperaments,
-    ageGroups, 
+    ageGroups,
   };
 }
