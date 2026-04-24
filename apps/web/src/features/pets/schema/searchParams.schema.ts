@@ -22,23 +22,29 @@ export const searchParamsSchema = z.object({
 
   search: z.string().optional(),
 
+  // Location filters
+  location: z.string().optional(),
+  lat: z.coerce.number().optional(),
+  lng: z.coerce.number().optional(),
+  radius: z.coerce.number().min(1).max(500).optional().default(50),
+
   type: stringToEnumArray(animalTypeEnum.enumValues),
 
   size: stringToEnumArray(sizeEnum.enumValues),
 
-  sex: stringToEnumArray(sexEnum.enumValues),
+  sex: z.enum(sexEnum.enumValues).optional(),
 
   age: stringToEnumArray(ageGroupEnum.enumValues),
 
-  energy: stringToEnumArray(energyLevelEnum.enumValues),
-
-  coat: stringToEnumArray(coatLengthEnum.enumValues),
-
-  breed: z
+  color: z
     .string()
     .optional()
     .transform((val) => (val ? val.split(",") : []))
     .pipe(z.array(z.string())),
+
+  energy: stringToEnumArray(energyLevelEnum.enumValues),
+
+  coat: stringToEnumArray(coatLengthEnum.enumValues),
 
   goodWithKids: z
     .string()
