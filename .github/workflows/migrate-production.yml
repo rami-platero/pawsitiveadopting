@@ -26,7 +26,6 @@ jobs:
   migrate-production:
     runs-on: ubuntu-22.04
     environment: Production
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     
     steps:
       - uses: actions/checkout@v4
