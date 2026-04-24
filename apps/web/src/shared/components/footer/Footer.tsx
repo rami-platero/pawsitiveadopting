@@ -3,12 +3,12 @@ import Link from "next/link";
 import Logo from "../Logo";
 import { MailIcon } from "lucide-react";
 import FooterCols from "@/shared/components/footer/FooterCols";
-import { useTranslations } from "next-intl";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import LanguageSwitcher from "@/shared/components/footer/LanguageSwitcher";
+import { getTranslations } from "next-intl/server";
 
-const Footer = () => {
-    const t = useTranslations("Footer");
+const Footer = async () => {
+    const t = await getTranslations('Footer');
 
     const socialLinks = [
         { icon: FaFacebook, href: "https://facebook.com", label: t("social.facebook") },
