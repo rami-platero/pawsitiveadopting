@@ -8,6 +8,7 @@ import {
   decimal,
   jsonb,
   pgEnum,
+  real,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { association, user } from "./auth-schema";
@@ -60,6 +61,12 @@ export const adoptionPost = pgTable("adoption_post", {
   externalPostLink: text("external_post_link"),
   description: text("description"),
   extraMetadata: jsonb("extra_metadata"),
+  // Location fields
+  city: text("city"),
+  state: text("state"),
+  country: text("country"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
   datePosted: timestamp("date_posted").defaultNow(),
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
@@ -70,7 +77,7 @@ export const animalDetails = pgTable("animal_details", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
     () => adoptionPost.id,
-    { onDelete: "cascade" }
+    { onDelete: "cascade" },
   ),
   breed: text("breed"),
   mixedBreed: boolean("mixed_breed"),
@@ -90,7 +97,7 @@ export const healthInfo = pgTable("health_info", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
     () => adoptionPost.id,
-    { onDelete: "cascade" }
+    { onDelete: "cascade" },
   ),
   spayedNeutered: boolean("spayed_neutered"),
   vaccinated: boolean("vaccinated"),
@@ -107,7 +114,7 @@ export const temperament = pgTable("temperament", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
     () => adoptionPost.id,
-    { onDelete: "cascade" }
+    { onDelete: "cascade" },
   ),
   temperamentTags: text("temperament_tags").array(),
   goodWithKids: boolean("good_with_kids"),
@@ -127,7 +134,7 @@ export const adoptionRequirements = pgTable("adoption_requirements", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
     () => adoptionPost.id,
-    { onDelete: "cascade" }
+    { onDelete: "cascade" },
   ),
   adoptionFee: decimal("adoption_fee"),
   currency: text("currency"),
@@ -146,7 +153,7 @@ export const media = pgTable("media", {
   id: serial("id").primaryKey(),
   adoptionPostId: integer("adoption_post_id").references(
     () => adoptionPost.id,
-    { onDelete: "cascade" }
+    { onDelete: "cascade" },
   ),
   type: mediaTypeEnum("media_type"),
   url: text("url"),
@@ -184,7 +191,7 @@ export const adoptionPostRelations = relations(
       references: [adoptionRequirements.adoptionPostId],
     }),
     media: many(media),
-  })
+  }),
 );
 
 export const animalDetailsRelations = relations(animalDetails, ({ one }) => ({
@@ -215,7 +222,7 @@ export const adoptionRequirementsRelations = relations(
       fields: [adoptionRequirements.adoptionPostId],
       references: [adoptionPost.id],
     }),
-  })
+  }),
 );
 
 export const mediaRelations = relations(media, ({ one }) => ({

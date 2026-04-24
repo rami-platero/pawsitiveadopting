@@ -15,6 +15,13 @@
       "when": 1766170697058,
       "tag": "0001_reflective_celestials",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1771177362606,
+      "tag": "0002_loving_the_stranger",
+      "breakpoints": true
     }
   ]
 }
