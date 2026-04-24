@@ -68,6 +68,11 @@
     "ConfirmEmail": {
       "title": "Verificación de Correo Electrónico",
       "description": "Verifica tu correo electrónico para completar el proceso de verificación de tu cuenta."
+    },
+    "PetPage": {
+      "title": "{name} - Disponible para Adopción",
+      "description": "Conoce a {name}, buscando un hogar amoroso.",
+      "notFound": "Mascota no encontrada"
     }
   },
   "HomePage": {
@@ -84,6 +89,60 @@
         "title": "¿Interesado en publicar mascotas en adopción?",
         "link": "Regístrate como asociación de forma gratuita"
       }
+    },
+    "recentPets": {
+      "title": "Mascotas Publicadas Recientemente",
+      "description": "Conoce a las mascotas más nuevas buscando su hogar definitivo",
+      "viewAll": "Ver Todas las Mascotas"
+    },
+    "howItWorks": {
+      "badge": "Proceso Simple",
+      "title": "Cómo Funciona",
+      "subtitle": "Encontrar tu compañero perfecto nunca ha sido tan fácil. Nuestro proceso simplificado hace que la adopción sea simple y sin estrés.",
+      "steps": {
+        "browse": {
+          "title": "Descubre Mascotas Globalmente",
+          "description": "Navega mascotas de asociaciones de todo el mundo. Encuentra tu pareja perfecta, sin importar dónde estén."
+        },
+        "profile": {
+          "title": "Crea Tu Perfil",
+          "description": "Completa tu información una vez. Guárdala en tu perfil para solicitudes rápidas más tarde."
+        },
+        "apply": {
+          "title": "Solicitud Rápida",
+          "description": "Solicita instantáneamente con tu perfil guardado. Un clic y tu solicitud está en camino."
+        },
+        "connect": {
+          "title": "Conéctate",
+          "description": "Una vez aceptado, chatea directamente con la asociación a través de nuestra mensajería segura en la aplicación."
+        }
+      },
+      "cta": "¿Listo para comenzar tu viaje de adopción?"
+    },
+    "associationCTA": {
+      "badge": "Para Asociaciones",
+      "title": "¿Eres una asociación?",
+      "description": "Únete a cientos de asociaciones en todo el mundo que usan Pawsitive Adopting para encontrar hogares amorosos para mascotas. Regístrate gratis y comienza a publicar en minutos.",
+      "features": {
+        "easy": {
+          "title": "Rápido y Fácil",
+          "description": "Configura tu cuenta y publica mascotas en minutos"
+        },
+        "dashboard": {
+          "title": "Panel Potente",
+          "description": "Gestiona todas tus publicaciones de adopción en un solo lugar"
+        },
+        "manage": {
+          "title": "Gestión Sencilla",
+          "description": "Actualiza información de mascotas y rastrea solicitudes sin esfuerzo"
+        },
+        "reach": {
+          "title": "Alcance Global",
+          "description": "Conéctate con posibles adoptantes de todo el mundo"
+        }
+      },
+      "cta": "Comienza Gratis",
+      "imagePlaceholder": "La imagen de vista previa del panel se mostrará aquí"
     }
   },
   "NotFoundPage": {
@@ -203,6 +262,40 @@
     }
   },
   "Pets": {
+    "Filters": {
+      "title": "Filtros",
+      "clearAll": "Borrar todo",
+      "radius": "Radio",
+      "sortBy": {
+        "title": "Ordenar por",
+        "newest": "Más reciente",
+        "oldest": "Más antiguo"
+      },
+      "animalType": {
+        "title": "Tipo de Animal",
+        "dog": "Perro",
+        "cat": "Gato"
+      },
+      "sex": {
+        "title": "Sexo",
+        "male": "Macho",
+        "female": "Hembra"
+      },
+      "age": {
+        "title": "Edad",
+        "puppy/kitten": "Cachorro/Gatito",
+        "young": "Joven",
+        "adult": "Adulto",
+        "senior": "Senior"
+      },
+      "color": {
+        "title": "Color"
+      },
+      "location": {
+        "title": "Ubicación",
+        "placeholder": "Buscar ciudad o código postal..."
+      }
+    },
     "PostItem": {
       "ageGroup": {
         "puppy/kitten": "Cachorro/Gatito",
@@ -215,7 +308,17 @@
         "male": "Macho",
         "female": "Hembra",
         "unknown": "Desconocido"
+      },
+      "compatibility": {
+        "kids": "Niños",
+        "dogs": "Perros",
+        "cats": "Gatos",
+        "others": "Otros"
       }
     }
+  },
+  "Browse": {
+    "title": "Explorar Mascotas",
+    "description": "Encuentra tu compañero perfecto"
   }
 }

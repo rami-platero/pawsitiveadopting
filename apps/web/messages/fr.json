@@ -68,6 +68,11 @@
     "ConfirmEmail": {
       "title": "Vérification de l'E-mail",
       "description": "Pour compléter le processus de vérification de votre e-mail, veuillez cliquer sur le bouton ci-dessous."
+    },
+    "PetPage": {
+      "title": "{name} - Disponible pour l'Adoption",
+      "description": "Rencontrez {name}, à la recherche d'un foyer aimant.",
+      "notFound": "Animal non trouvé"
     }
   },
   "HomePage": {
@@ -84,6 +89,60 @@
         "title": "Intéressé par la publication d'animaux en adoption?",
         "link": "Inscrivez-vous gratuitement en tant qu'association"
       }
+    },
+    "recentPets": {
+      "title": "Animaux Récemment Publiés",
+      "description": "Découvrez les nouveaux animaux à la recherche de leur foyer définitif",
+      "viewAll": "Voir Tous les Animaux"
+    },
+    "howItWorks": {
+      "badge": "Processus Simple",
+      "title": "Comment Ça Marche",
+      "subtitle": "Trouver votre compagnon parfait n'a jamais été aussi facile. Notre processus simplifié rend l'adoption simple et sans stress.",
+      "steps": {
+        "browse": {
+          "title": "Découvrez des Animaux du Monde Entier",
+          "description": "Parcourez les animaux des associations du monde entier. Trouvez votre compagnon idéal, peu importe où ils se trouvent."
+        },
+        "profile": {
+          "title": "Créez Votre Profil",
+          "description": "Remplissez vos informations une fois. Enregistrez-les dans votre profil pour des candidatures rapides plus tard."
+        },
+        "apply": {
+          "title": "Candidature Rapide",
+          "description": "Postulez instantanément avec votre profil enregistré. Un clic et votre candidature est en route."
+        },
+        "connect": {
+          "title": "Connectez-vous",
+          "description": "Une fois accepté, discutez directement avec l'association via notre messagerie sécurisée intégrée."
+        }
+      },
+      "cta": "Prêt à commencer votre parcours d'adoption ?"
+    },
+    "associationCTA": {
+      "badge": "Pour les Associations",
+      "title": "Êtes-vous une association?",
+      "description": "Rejoignez des centaines d'associations dans le monde qui utilisent Pawsitive Adopting pour trouver des foyers aimants pour les animaux. Inscrivez-vous gratuitement et commencez à publier en quelques minutes.",
+      "features": {
+        "easy": {
+          "title": "Rapide et Facile",
+          "description": "Configurez votre compte et publiez des animaux en quelques minutes"
+        },
+        "dashboard": {
+          "title": "Tableau de Bord Puissant",
+          "description": "Gérez toutes vos annonces d'adoption en un seul endroit"
+        },
+        "manage": {
+          "title": "Gestion Simple",
+          "description": "Mettez à jour les informations des animaux et suivez les candidatures sans effort"
+        },
+        "reach": {
+          "title": "Portée Mondiale",
+          "description": "Connectez-vous avec des adoptants potentiels du monde entier"
+        }
+      },
+      "cta": "Commencer Gratuitement",
+      "imagePlaceholder": "L'aperçu du tableau de bord sera affiché ici"
     }
   },
   "NotFoundPage": {
@@ -203,6 +262,40 @@
     }
   },
   "Pets": {
+    "Filters": {
+      "title": "Filtres",
+      "clearAll": "Tout effacer",
+      "radius": "Rayon",
+      "sortBy": {
+        "title": "Trier par",
+        "newest": "Plus récent",
+        "oldest": "Plus ancien"
+      },
+      "animalType": {
+        "title": "Type d'Animal",
+        "dog": "Chien",
+        "cat": "Chat"
+      },
+      "sex": {
+        "title": "Sexe",
+        "male": "Mâle",
+        "female": "Femelle"
+      },
+      "age": {
+        "title": "Âge",
+        "puppy/kitten": "Chiot/Chaton",
+        "young": "Jeune",
+        "adult": "Adulte",
+        "senior": "Senior"
+      },
+      "color": {
+        "title": "Couleur"
+      },
+      "location": {
+        "title": "Localisation",
+        "placeholder": "Rechercher une ville ou un code postal..."
+      }
+    },
     "PostItem": {
       "ageGroup": {
         "puppy/kitten": "Chiot/Chaton",
@@ -215,7 +308,17 @@
         "male": "Mâle",
         "female": "Femelle",
         "unknown": "Inconnu"
+      },
+      "compatibility": {
+        "kids": "Enfants",
+        "dogs": "Chiens",
+        "cats": "Chats",
+        "others": "Autres"
       }
     }
+  },
+  "Browse": {
+    "title": "Parcourir les Animaux",
+    "description": "Trouvez votre compagnon idéal"
   }
 }

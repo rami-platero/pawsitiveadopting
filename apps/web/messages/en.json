@@ -68,6 +68,11 @@
     "ConfirmEmail": {
       "title": "Email Verification",
       "description": "Verify your email to complete the verification process for your account."
+    },
+    "PetPage": {
+      "title": "{name} - Available for Adoption",
+      "description": "Meet {name}, looking for a loving home.",
+      "notFound": "Pet Not Found"
     }
   },
   "HomePage": {
@@ -84,6 +89,60 @@
         "title": "Interested in posting pets for adoption?",
         "link": "Sign up as an association for free"
       }
+    },
+    "recentPets": {
+      "title": "Recently Posted Pets",
+      "description": "Meet the newest pets looking for their forever homes",
+      "viewAll": "View All Pets"
+    },
+    "howItWorks": {
+      "badge": "Simple Process",
+      "title": "How It Works",
+      "subtitle": "Finding your perfect companion has never been easier. Our streamlined process makes adoption simple and stress-free.",
+      "steps": {
+        "browse": {
+          "title": "Discover Pets Globally",
+          "description": "Browse pets from associations across the world. Find your perfect match, no matter where they are."
+        },
+        "profile": {
+          "title": "Create Your Profile",
+          "description": "Fill out your information once. Save it to your profile for quick applications later."
+        },
+        "apply": {
+          "title": "Quick Apply",
+          "description": "Apply instantly with your saved profile. One click and your application is on its way."
+        },
+        "connect": {
+          "title": "Get Connected",
+          "description": "Once accepted, chat directly with the association through our secure in-app messaging."
+        }
+      },
+      "cta": "Ready to start your adoption journey?"
+    },
+    "associationCTA": {
+      "badge": "For Associations",
+      "title": "Are you an association?",
+      "description": "Join hundreds of associations worldwide using Pawsitive Adopting to find loving homes for pets. Sign up for free and start posting in minutes.",
+      "features": {
+        "easy": {
+          "title": "Quick & Easy",
+          "description": "Set up your account and post pets in minutes"
+        },
+        "dashboard": {
+          "title": "Powerful Dashboard",
+          "description": "Manage all your adoption posts in one place"
+        },
+        "manage": {
+          "title": "Easy Management",
+          "description": "Update pet info and track applications effortlessly"
+        },
+        "reach": {
+          "title": "Global Reach",
+          "description": "Connect with potential adopters worldwide"
+        }
+      },
+      "cta": "Get Started for Free",
+      "imagePlaceholder": "Dashboard preview image will be displayed here"
     }
   },
   "NotFoundPage": {
@@ -203,6 +262,40 @@
     }
   },
   "Pets": {
+    "Filters": {
+      "title": "Filters",
+      "clearAll": "Clear all",
+      "radius": "Radius",
+      "sortBy": {
+        "title": "Sort By",
+        "newest": "Newest",
+        "oldest": "Oldest"
+      },
+      "animalType": {
+        "title": "Animal Type",
+        "dog": "Dog",
+        "cat": "Cat"
+      },
+      "sex": {
+        "title": "Sex",
+        "male": "Male",
+        "female": "Female"
+      },
+      "age": {
+        "title": "Age",
+        "puppy/kitten": "Puppy/Kitten",
+        "young": "Young",
+        "adult": "Adult",
+        "senior": "Senior"
+      },
+      "color": {
+        "title": "Color"
+      },
+      "location": {
+        "title": "Location",
+        "placeholder": "Search city or zip..."
+      }
+    },
     "PostItem": {
       "ageGroup": {
         "puppy/kitten": "Puppy/Kitten",
@@ -215,7 +308,85 @@
         "male": "Male",
         "female": "Female",
         "unknown": "Unknown"
+      },
+      "compatibility": {
+        "kids": "Kids",
+        "dogs": "Dogs",
+        "cats": "Cats",
+        "others": "Others"
+      }
+    },
+    "PetDetail": {
+      "backToHome": "Back to Browse",
+      "badge": {
+        "available": "Available",
+        "pending": "Pending",
+        "adopted": "Adopted"
+      },
+      "contactButton": "Contact About Adoption",
+      "aboutSection": {
+        "title": "About {name}",
+        "description": "Description",
+        "details": {
+          "breed": "Breed",
+          "age": "Age",
+          "sex": "Sex",
+          "size": "Size",
+          "coatLength": "Coat Length",
+          "coatColor": "Color",
+          "ageGroup": "Age Group",
+          "energyLevel": "Energy Level",
+          "years": "{count} years old",
+          "mixedBreed": "Mixed Breed"
+        },
+        "temperament": {
+          "title": "Temperament",
+          "goodWith": "Good With",
+          "kids": "Kids",
+          "dogs": "Dogs",
+          "cats": "Cats",
+          "otherAnimals": "Other Animals",
+          "energyLevel": "Energy Level",
+          "playfulness": "Playfulness",
+          "trainingLevel": "Training Level",
+          "reactionToStrangers": "Reaction to Strangers",
+          "tags": "Personality Traits",
+          "fears": "Fears",
+          "yes": "Yes",
+          "no": "No",
+          "unknown": "Unknown"
+        }
+      },
+      "healthSection": {
+        "title": "Health Information",
+        "spayedNeutered": "Spayed/Neutered",
+        "vaccinated": "Vaccinated",
+        "identification": "Microchipped",
+        "specialNeeds": "Special Needs",
+        "specialNeedsDescription": "Special Needs Description",
+        "healthIssues": "Health Issues",
+        "disability": "Disability",
+        "yes": "Yes",
+        "no": "No",
+        "none": "None"
+      },
+      "requirementsSection": {
+        "title": "Adoption Requirements",
+        "feeIncludes": "Fee Includes",
+        "homeCheckRequired": "Home Check Required",
+        "fencedYardRequired": "Fenced Yard Required",
+        "indoorOnly": "Indoor Only",
+        "experienceRequired": "Experience Required",
+        "documentsRequired": "Documents Required",
+        "adoptionContract": "Adoption Contract",
+        "yes": "Yes",
+        "no": "No",
+        "notSpecified": "Not Specified"
       }
     }
+  },
+  "Browse": {
+    "title": "Browse Pets",
+    "description": "Find your perfect companion"
   }
 }
