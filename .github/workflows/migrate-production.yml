@@ -1,0 +1,55 @@
+name: Migrate Production Database
+
+on:
+  workflow_dispatch:
+    inputs:
+      migration_direction:
+        description: 'Migration direction'
+        required: true
+        default: 'push'
+        type: choice
+        options:
+          - push
+          - drop
+  workflow_run:
+    workflows: ["Build"]
+    branches:
+      - main
+    types:
+      - completed
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  migrate-production:
+    runs-on: ubuntu-22.04
+    environment: Production
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: ./.github/actions/pnpm-install
+      
+      - name: Run Drizzle Migrations
+        run: pnpm --filter @pawsitiveadopting/web drizzle-kit migrate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
+      - name: Verify Migration Status
+        run: pnpm --filter @pawsitiveadopting/web drizzle-kit check
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
+      - name: Notify on Success
+        if: success()
+        run: |
+          echo "✅ Production database migration completed successfully"
+      
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "❌ Production database migration failed"
+          exit 1
