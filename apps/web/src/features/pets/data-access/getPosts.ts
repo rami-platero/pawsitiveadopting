@@ -5,17 +5,44 @@ import {
   AnimalDetails,
   animalDetails,
   Media,
+  Temperament,
 } from "@/db/schema/posts-schema";
 import { buildConditions } from "@/features/pets/data-access/getFilters";
 import { ParsedSearchParams } from "@/features/pets/schema/searchParams.schema";
-import { asc, count, desc, eq, inArray } from "drizzle-orm";
+import { asc, count, desc, eq, inArray, sql } from "drizzle-orm";
 
-export type AdoptionPostExtended = AdoptionPost & { media: Media[], animalDetails: AnimalDetails };
+export type AdoptionPostExtended = AdoptionPost & {
+  media: Media[];
+  animalDetails: AnimalDetails;
+  temperament: Temperament | null;
+};
 
-const LIMIT = 10;
+export const LIMIT = 10;
+
+/**
+ * Build a SQL condition for filtering posts within a radius (km) of a point.
+ * Uses the Haversine formula approximation in PostgreSQL.
+ */
+function buildLocationCondition(lat: number, lng: number, radiusKm: number) {
+  return sql`(
+    6371 * acos(
+      cos(radians(${lat}))
+      * cos(radians(${adoptionPost.latitude}))
+      * cos(radians(${adoptionPost.longitude}) - radians(${lng}))
+      + sin(radians(${lat}))
+      * sin(radians(${adoptionPost.latitude}))
+    )
+  ) <= ${radiusKm}`;
+}
 
 export async function getFilteredPosts(filters: ParsedSearchParams) {
   const conditions = buildConditions(filters);
+
+  // Build location filter if coordinates are provided
+  const locationCondition =
+    filters.lat !== undefined && filters.lng !== undefined
+      ? buildLocationCondition(filters.lat, filters.lng, filters.radius)
+      : undefined;
 
   let orderByCondition = desc(adoptionPost.datePosted);
 
@@ -29,15 +56,20 @@ export async function getFilteredPosts(filters: ParsedSearchParams) {
       break;
   }
 
+  // Combine all conditions (filters + location)
+  const allConditions = locationCondition
+    ? sql`${conditions} AND ${locationCondition}`
+    : conditions;
+
   const [matches, totalCountResult] = await Promise.all([
     db
       .select({ id: adoptionPost.id })
       .from(adoptionPost)
       .innerJoin(
         animalDetails,
-        eq(adoptionPost.id, animalDetails.adoptionPostId)
+        eq(adoptionPost.id, animalDetails.adoptionPostId),
       )
-      .where(conditions)
+      .where(allConditions)
       .orderBy(orderByCondition)
       .limit(LIMIT)
       .offset((filters.page - 1) * LIMIT),
@@ -47,9 +79,9 @@ export async function getFilteredPosts(filters: ParsedSearchParams) {
       .from(adoptionPost)
       .innerJoin(
         animalDetails,
-        eq(adoptionPost.id, animalDetails.adoptionPostId)
+        eq(adoptionPost.id, animalDetails.adoptionPostId),
       )
-      .where(conditions),
+      .where(allConditions),
   ]);
 
   const ids = matches.map((row) => row.id);
@@ -64,8 +96,9 @@ export async function getFilteredPosts(filters: ParsedSearchParams) {
     with: {
       animalDetails: true,
       media: true,
+      temperament: true,
     },
-    orderBy: orderByCondition
+    orderBy: orderByCondition,
   });
 
   return {
