@@ -6,7 +6,6 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@pawsitiveadopting/ui/*": ["../../packages/ui/src/*"]
