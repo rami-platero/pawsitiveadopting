@@ -36,11 +36,23 @@ jobs:
         run: pnpm --filter pawsitive-adopting exec drizzle-kit migrate
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
+          EMAIL_SENDER_ADDRESS: ${{ secrets.EMAIL_SENDER_ADDRESS }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+
       - name: Verify Migration Status
         run: pnpm --filter pawsitive-adopting exec drizzle-kit check
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_SENDER_NAME: ${{ secrets.EMAIL_SENDER_NAME }}
+          EMAIL_SENDER_ADDRESS: ${{ secrets.EMAIL_SENDER_ADDRESS }}
+          BASE_URL: ${{ secrets.BASE_URL }}
       
       - name: Notify on Success
         if: success()
