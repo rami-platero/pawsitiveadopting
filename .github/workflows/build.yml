@@ -17,6 +17,7 @@ jobs:
       - name: Build
         run: pnpm build
         env:
+          AUTO_MIGRATE: "true"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}

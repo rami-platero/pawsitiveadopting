@@ -33,12 +33,12 @@ jobs:
       - uses: ./.github/actions/pnpm-install
       
       - name: Run Drizzle Migrations
-        run: pnpm --filter pawsitive-adopting drizzle-kit migrate
+        run: pnpm --filter pawsitive-adopting exec drizzle-kit migrate
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       
       - name: Verify Migration Status
-        run: pnpm --filter pawsitive-adopting drizzle-kit check
+        run: pnpm --filter pawsitive-adopting exec drizzle-kit check
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       
