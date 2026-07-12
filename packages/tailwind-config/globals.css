@@ -28,6 +28,8 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -44,14 +46,14 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --text-paragraph: 0.5rem
+  --text-paragraph: 0.5rem;
 }
 
 :root {
   --radius: 0.625rem;
   --background: oklch(99.172% 0.00843 84.491);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
+  --card: oklch(99.172% 0.00843 84.491);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -61,10 +63,13 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: oklch(0.94 0.1446 105.03);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --destructive-foreground: oklch(0.985 0 0);
+  --success: oklch(96.7% 0.038 155.8);
+  --success-foreground: oklch(37.5% 0.11 154.5);
+  --border: oklch(0.18 0.0422 27.55 / 0.24);
   --input: oklch(17.965% 0.04217 27.528 / 0.37);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -99,6 +104,9 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --success: oklch(0.962 0.018 142.495);
+  --success-foreground: oklch(0.227 0.108 142.49508 142.495);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
@@ -144,7 +152,7 @@
 @layer utilities {
   .lightui-shimmer {
     background-color: #d8d8d8;
-    
+
     background-image: linear-gradient(
       to right,
       #d8d8d8 0%,
@@ -152,10 +160,10 @@
       #d8d8d8 40%,
       #d8d8d8 100%
     );
-    
+
     background-repeat: no-repeat;
     background-size: 800px 1000px;
-    
+
     animation: shimmer 1s linear infinite forwards;
   }
 }

@@ -16,7 +16,7 @@ export default function NotFound() {
         <h1 className="md:text-5xl text-4xl font-medium max-w-xl">
           {t("title")}
         </h1>
-        <p className="text-gray-600 text-lg">{t("description")}</p>
+        <p className="text-muted-foreground text-lg">{t("description")}</p>
         <Link className={cn(buttonVariants({ size: "lg" }), "mt-4")} href={"/"}>
           <Home className="h-4 w-4" />
           {t("button")}

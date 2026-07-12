@@ -42,9 +42,9 @@ export default async function SignUpPage({ params }: { params: { locale: string 
           <EmailRegisterForm />
 
           <div className="flex items-center w-full my-4">
-            <div className="flex-1 h-px bg-gray-300"></div>
-            <span className="px-4 text-xs text-gray-500">{t("or")}</span>
-            <div className="flex-1 h-px bg-gray-300"></div>
+            <div className="flex-1 h-px bg-border"></div>
+            <span className="px-4 text-xs text-muted-foreground">{t("or")}</span>
+            <div className="flex-1 h-px bg-border"></div>
           </div>
 
           <SignInWithGoogle />
