@@ -8,7 +8,6 @@ interface FavoriteButtonProps {
     initialFavorited?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function FavoriteButton({ postId: _postId, initialFavorited = false }: FavoriteButtonProps) {
     const [isFavorited, setIsFavorited] = useState(initialFavorited);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -29,13 +28,13 @@ export default function FavoriteButton({ postId: _postId, initialFavorited = fal
     return (
         <button
             onClick={handleClick}
-            className="cursor-pointer group/heart relative p-2.5 rounded-full hover:bg-muted/50 transition-all duration-200  z-10"
+            className="cursor-pointer group/heart relative z-10 rounded-full bg-black/50 p-2.5 text-white shadow-md transition-all duration-200 hover:bg-black/85"
             aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
         >
             <Heart
                 className={`h-5 w-5 transition-all duration-200 ${isFavorited
                     ? 'fill-red-500 text-red-500'
-                    : 'text-foreground group-hover/heart:text-red-400'
+                    : 'text-white'
                     } ${isAnimating ? 'scale-125' : 'scale-100'}`}
             />
         </button>

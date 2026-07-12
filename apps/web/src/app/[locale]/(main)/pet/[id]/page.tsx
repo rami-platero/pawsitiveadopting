@@ -71,6 +71,8 @@ export default async function PetDetailPage({ params }: Props) {
                     }}
                     animalDetails={animalDetails}
                     temperament={temperament}
+                    association={post.association}
+                    user={post.user}
                     translations={{
                         badge: {
                             available: t('badge.available'),
@@ -79,6 +81,7 @@ export default async function PetDetailPage({ params }: Props) {
                         },
                         description: t('aboutSection.description'),
                         contactButton: t('contactButton'),
+                        postedBy: t('postedBy'),
                         details: {
                             years: (count: number) => t('aboutSection.details.years', { count }),
                             breed: t('aboutSection.details.breed'),
@@ -88,13 +91,43 @@ export default async function PetDetailPage({ params }: Props) {
                             coatLength: t('aboutSection.details.coatLength'),
                             coatColor: t('aboutSection.details.coatColor'),
                             ageGroup: t('aboutSection.details.ageGroup'),
+                            sexValues: {
+                                male: t('aboutSection.details.sexValues.male'),
+                                female: t('aboutSection.details.sexValues.female'),
+                            },
+                            sizeValues: {
+                                small: t('aboutSection.details.sizeValues.small'),
+                                medium: t('aboutSection.details.sizeValues.medium'),
+                                large: t('aboutSection.details.sizeValues.large'),
+                                giant: t('aboutSection.details.sizeValues.giant'),
+                            },
+                            coatLengthValues: {
+                                hairless: t('aboutSection.details.coatLengthValues.hairless'),
+                                short: t('aboutSection.details.coatLengthValues.short'),
+                                medium: t('aboutSection.details.coatLengthValues.medium'),
+                                long: t('aboutSection.details.coatLengthValues.long'),
+                            },
+                            ageGroupValues: {
+                                'puppy/kitten': t('aboutSection.details.ageGroupValues.puppy/kitten'),
+                                young: t('aboutSection.details.ageGroupValues.young'),
+                                adult: t('aboutSection.details.ageGroupValues.adult'),
+                                senior: t('aboutSection.details.ageGroupValues.senior'),
+                            },
                         },
                         temperament: {
+                            compatibility: t('aboutSection.temperament.compatibility'),
                             goodWith: t('aboutSection.temperament.goodWith'),
+                            badWith: t('aboutSection.temperament.badWith'),
                             kids: t('aboutSection.temperament.kids'),
                             dogs: t('aboutSection.temperament.dogs'),
                             cats: t('aboutSection.temperament.cats'),
                             otherAnimals: t('aboutSection.temperament.otherAnimals'),
+                            environmentTitle: t('aboutSection.temperament.environmentTitle'),
+                            goodIn: t('aboutSection.temperament.goodIn'),
+                            badIn: t('aboutSection.temperament.badIn'),
+                            apartment: t('aboutSection.temperament.apartment'),
+                            house: t('aboutSection.temperament.house'),
+                            garden: t('aboutSection.temperament.garden'),
                         },
                     }}
                 />
@@ -112,6 +145,11 @@ export default async function PetDetailPage({ params }: Props) {
                     temperament: {
                         title: t('aboutSection.temperament.title'),
                         energyLevel: t('aboutSection.temperament.energyLevel'),
+                        energyLevelValues: {
+                            low: t('aboutSection.temperament.energyLevelValues.low'),
+                            medium: t('aboutSection.temperament.energyLevelValues.medium'),
+                            high: t('aboutSection.temperament.energyLevelValues.high'),
+                        },
                         playfulness: t('aboutSection.temperament.playfulness'),
                         trainingLevel: t('aboutSection.temperament.trainingLevel'),
                         reactionToStrangers: t('aboutSection.temperament.reactionToStrangers'),

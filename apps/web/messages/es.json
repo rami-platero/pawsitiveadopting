@@ -332,6 +332,110 @@
         "cats": "Gatos",
         "others": "Otros"
       }
+    },
+    "PetDetail": {
+      "backToHome": "Volver a explorar",
+      "badge": {
+        "available": "Disponible",
+        "pending": "Pendiente",
+        "adopted": "Adoptado"
+      },
+      "contactButton": "Contactar sobre adopción",
+      "postedBy": "Publicado por",
+      "aboutSection": {
+        "title": "Acerca de {name}",
+        "description": "Descripción",
+        "details": {
+          "breed": "Raza",
+          "age": "Edad",
+          "sex": "Sexo",
+          "size": "Tamaño",
+          "coatLength": "Longitud del pelaje",
+          "coatColor": "Color",
+          "ageGroup": "Grupo de edad",
+          "energyLevel": "Nivel de energía",
+          "years": "{count} años",
+          "mixedBreed": "Mezcla de razas",
+          "sexValues": {
+            "male": "Macho",
+            "female": "Hembra"
+          },
+          "sizeValues": {
+            "small": "Pequeño",
+            "medium": "Mediano",
+            "large": "Grande",
+            "giant": "Gigante"
+          },
+          "coatLengthValues": {
+            "hairless": "Sin pelo",
+            "short": "Corto",
+            "medium": "Mediano",
+            "long": "Largo"
+          },
+          "ageGroupValues": {
+            "puppy/kitten": "Cachorro",
+            "young": "Joven",
+            "adult": "Adulto",
+            "senior": "Mayor"
+          }
+        },
+        "temperament": {
+          "title": "Temperamento",
+          "compatibility": "Compatibilidad",
+          "goodWith": "Bien con",
+          "badWith": "Mal con",
+          "kids": "Niños",
+          "dogs": "Perros",
+          "cats": "Gatos",
+          "otherAnimals": "Otros animales",
+          "environmentTitle": "Entorno",
+          "goodIn": "Bien en",
+          "badIn": "Mal en",
+          "apartment": "Apartamento",
+          "house": "Casa",
+          "garden": "Jardín",
+          "energyLevel": "Nivel de energía",
+          "energyLevelValues": {
+            "low": "Bajo",
+            "medium": "Medio",
+            "high": "Alto"
+          },
+          "playfulness": "Juguetón",
+          "trainingLevel": "Nivel de entrenamiento",
+          "reactionToStrangers": "Reacción a extraños",
+          "tags": "Rasgos de personalidad",
+          "fears": "Miedos",
+          "yes": "Sí",
+          "no": "No",
+          "unknown": "Desconocido"
+        }
+      },
+      "healthSection": {
+        "title": "Información de salud",
+        "spayedNeutered": "Esterilizado/Castrado",
+        "vaccinated": "Vacunado",
+        "identification": "Microchip",
+        "specialNeeds": "Necesidades especiales",
+        "specialNeedsDescription": "Descripción de necesidades especiales",
+        "healthIssues": "Problemas de salud",
+        "disability": "Discapacidad",
+        "yes": "Sí",
+        "no": "No",
+        "none": "Ninguno"
+      },
+      "requirementsSection": {
+        "title": "Requisitos de adopción",
+        "feeIncludes": "La tarifa incluye",
+        "homeCheckRequired": "Revisión en el hogar requerida",
+        "fencedYardRequired": "Se requiere patio cercado",
+        "indoorOnly": "Solo interior",
+        "experienceRequired": "Experiencia requerida",
+        "documentsRequired": "Documentos requeridos",
+        "adoptionContract": "Contrato de adopción",
+        "yes": "Sí",
+        "no": "No",
+        "notSpecified": "No especificado"
+      }
     }
   },
   "Browse": {

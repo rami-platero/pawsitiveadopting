@@ -1,10 +1,11 @@
 import { Button } from '@pawsitiveadopting/ui/components/button';
 import { Badge } from '@pawsitiveadopting/ui/components/badge';
-import { MapPin, Calendar, Baby, Dog, Cat, PawPrint } from 'lucide-react';
+import { MapPin, Calendar, Baby, Dog, Cat, PawPrint, Building2, Home, Trees } from 'lucide-react';
 import { cn } from '@pawsitiveadopting/ui/lib/utils';
 import FavoriteButton from './favorite-button';
 import CompatibilityBadge from './compatibility-badge';
 import StatItem from './stat-item';
+import PostedBy from './posted-by';
 
 type PetMainInfoProps = {
     post: {
@@ -17,6 +18,14 @@ type PetMainInfoProps = {
         country?: string | null;
         description?: string | null;
     };
+    association?: {
+        name: string;
+        slug: string | null;
+        logo?: string | null;
+    } | null;
+    user?: {
+        name: string;
+    } | null;
     animalDetails: {
         estimatedAgeYrs?: number | null;
         breed?: string | null;
@@ -33,6 +42,9 @@ type PetMainInfoProps = {
         goodWithDogs?: boolean | null;
         goodWithCats?: boolean | null;
         goodWithOtherAnimals?: boolean | null;
+        goodInApartment?: boolean | null;
+        goodInHouse?: boolean | null;
+        goodInGarden?: boolean | null;
     } | null;
     translations: {
         badge: {
@@ -42,6 +54,7 @@ type PetMainInfoProps = {
         };
         description: string;
         contactButton: string;
+        postedBy: string;
         details: {
             years: (count: number) => string;
             breed: string;
@@ -51,13 +64,25 @@ type PetMainInfoProps = {
             coatLength: string;
             coatColor: string;
             ageGroup: string;
+            sexValues: Record<string, string>;
+            sizeValues: Record<string, string>;
+            coatLengthValues: Record<string, string>;
+            ageGroupValues: Record<string, string>;
         };
         temperament: {
+            compatibility: string;
             goodWith: string;
+            badWith: string;
             kids: string;
             dogs: string;
             cats: string;
             otherAnimals: string;
+            environmentTitle: string;
+            goodIn: string;
+            badIn: string;
+            apartment: string;
+            house: string;
+            garden: string;
         };
     };
 };
@@ -66,12 +91,17 @@ type PetMainInfoProps = {
  * Main pet information section (right column):
  * Status, name, location, age, description, stats, compatibility, and contact button.
  */
-export default function PetMainInfo({ post, animalDetails, temperament, translations }: PetMainInfoProps) {
+export default function PetMainInfo({ post, association, user, animalDetails, temperament, translations }: PetMainInfoProps) {
     const hasCompatibilityInfo =
         temperament?.goodWithKids !== null ||
         temperament?.goodWithDogs !== null ||
         temperament?.goodWithCats !== null ||
         temperament?.goodWithOtherAnimals !== null;
+
+    const hasEnvironmentInfo =
+        temperament?.goodInApartment !== null ||
+        temperament?.goodInHouse !== null ||
+        temperament?.goodInGarden !== null;
 
     return (
         <div className="space-y-5">
@@ -79,7 +109,7 @@ export default function PetMainInfo({ post, animalDetails, temperament, translat
             <div className="flex items-start justify-between gap-4">
                 <div>
                     {post.status === 'available' && (
-                        <Badge className={cn("mb-3 bg-green-600 hover:bg-green-700 border-green-600")}>
+                        <Badge className={cn("mb-3 bg-success hover:bg-success/90 border-success text-success-foreground")}>
                             {translations.badge.available}
                         </Badge>
                     )}
@@ -131,28 +161,36 @@ export default function PetMainInfo({ post, animalDetails, temperament, translat
 
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-2 gap-3 bg-muted/30 rounded-lg">
+                {animalDetails.ageGroup && (
+                    <StatItem
+                        label={translations.details.ageGroup}
+                        value={translations.details.ageGroupValues[animalDetails.ageGroup] ?? animalDetails.ageGroup.replace('/', ' / ').split(' ').map(word =>
+                            word === '/' ? word : word.charAt(0).toUpperCase() + word.slice(1)
+                        ).join(' ')}
+                    />
+                )}
+                {animalDetails.sex && (
+                    <StatItem
+                        label={translations.details.sex}
+                        value={translations.details.sexValues[animalDetails.sex] ?? (animalDetails.sex.charAt(0).toUpperCase() + animalDetails.sex.slice(1))}
+                    />
+                )}
+                {animalDetails.size && (
+                    <StatItem
+                        label={translations.details.size}
+                        value={translations.details.sizeValues[animalDetails.size] ?? (animalDetails.size.charAt(0).toUpperCase() + animalDetails.size.slice(1))}
+                    />
+                )}
                 {animalDetails.breed && (
                     <StatItem
                         label={translations.details.breed}
                         value={`${animalDetails.breed}${animalDetails.mixedBreed ? ` (${translations.details.mixedBreed})` : ''}`}
                     />
                 )}
-                {animalDetails.sex && (
-                    <StatItem
-                        label={translations.details.sex}
-                        value={animalDetails.sex.charAt(0).toUpperCase() + animalDetails.sex.slice(1)}
-                    />
-                )}
-                {animalDetails.size && (
-                    <StatItem
-                        label={translations.details.size}
-                        value={animalDetails.size.charAt(0).toUpperCase() + animalDetails.size.slice(1)}
-                    />
-                )}
                 {animalDetails.coatLength && (
                     <StatItem
                         label={translations.details.coatLength}
-                        value={animalDetails.coatLength.charAt(0).toUpperCase() + animalDetails.coatLength.slice(1)}
+                        value={translations.details.coatLengthValues[animalDetails.coatLength] ?? (animalDetails.coatLength.charAt(0).toUpperCase() + animalDetails.coatLength.slice(1))}
                     />
                 )}
                 {(animalDetails.coatColorPrimary || animalDetails.coatColorSecondary) && (
@@ -164,52 +202,93 @@ export default function PetMainInfo({ post, animalDetails, temperament, translat
                             .join(', ')}
                     />
                 )}
-                {animalDetails.ageGroup && (
-                    <StatItem
-                        label={translations.details.ageGroup}
-                        value={animalDetails.ageGroup.replace('/', ' / ').split(' ').map(word =>
-                            word === '/' ? word : word.charAt(0).toUpperCase() + word.slice(1)
-                        ).join(' ')}
-                    />
-                )}
             </div>
 
-            {/* Temperament - Good With */}
-            {temperament && hasCompatibilityInfo && (
-                <div className="space-y-3">
-                    <h3 className="font-semibold">{translations.temperament.goodWith}</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                        {temperament.goodWithKids !== null && (
-                            <CompatibilityBadge
-                                icon={Baby}
-                                label={translations.temperament.kids}
-                                isCompatible={temperament.goodWithKids!}
-                            />
-                        )}
-                        {temperament.goodWithDogs !== null && (
-                            <CompatibilityBadge
-                                icon={Dog}
-                                label={translations.temperament.dogs}
-                                isCompatible={temperament.goodWithDogs!}
-                            />
-                        )}
-                        {temperament.goodWithCats !== null && (
-                            <CompatibilityBadge
-                                icon={Cat}
-                                label={translations.temperament.cats}
-                                isCompatible={temperament.goodWithCats!}
-                            />
-                        )}
-                        {temperament.goodWithOtherAnimals !== null && (
-                            <CompatibilityBadge
-                                icon={PawPrint}
-                                label={translations.temperament.otherAnimals}
-                                isCompatible={temperament.goodWithOtherAnimals!}
-                            />
-                        )}
-                    </div>
+            {/* Temperament - Good With & Good In (Environment) */}
+            {temperament && (hasCompatibilityInfo || hasEnvironmentInfo) && (
+                <div className="grid grid-cols-2 gap-4">
+                    {hasCompatibilityInfo && (
+                        <div className="space-y-3">
+                            <h3 className="font-semibold">{translations.temperament.compatibility}</h3>
+                            <div className="flex flex-wrap gap-3">
+                                {temperament.goodWithKids !== null && (
+                                    <CompatibilityBadge
+                                        icon={Baby}
+                                        label={translations.temperament.kids}
+                                        positivePrefix={translations.temperament.goodWith}
+                                        negativePrefix={translations.temperament.badWith}
+                                        isCompatible={temperament.goodWithKids!}
+                                    />
+                                )}
+                                {temperament.goodWithDogs !== null && (
+                                    <CompatibilityBadge
+                                        icon={Dog}
+                                        label={translations.temperament.dogs}
+                                        positivePrefix={translations.temperament.goodWith}
+                                        negativePrefix={translations.temperament.badWith}
+                                        isCompatible={temperament.goodWithDogs!}
+                                    />
+                                )}
+                                {temperament.goodWithCats !== null && (
+                                    <CompatibilityBadge
+                                        icon={Cat}
+                                        label={translations.temperament.cats}
+                                        positivePrefix={translations.temperament.goodWith}
+                                        negativePrefix={translations.temperament.badWith}
+                                        isCompatible={temperament.goodWithCats!}
+                                    />
+                                )}
+                                {temperament.goodWithOtherAnimals !== null && (
+                                    <CompatibilityBadge
+                                        icon={PawPrint}
+                                        label={translations.temperament.otherAnimals}
+                                        positivePrefix={translations.temperament.goodWith}
+                                        negativePrefix={translations.temperament.badWith}
+                                        isCompatible={temperament.goodWithOtherAnimals!}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {hasEnvironmentInfo && (
+                        <div className="space-y-3">
+                            <h3 className="font-semibold">{translations.temperament.environmentTitle}</h3>
+                            <div className="flex flex-wrap gap-3">
+                                {temperament.goodInApartment !== null && (
+                                    <CompatibilityBadge
+                                        icon={Building2}
+                                        label={translations.temperament.apartment}
+                                        positivePrefix={translations.temperament.goodIn}
+                                        negativePrefix={translations.temperament.badIn}
+                                        isCompatible={temperament.goodInApartment!}
+                                    />
+                                )}
+                                {temperament.goodInHouse !== null && (
+                                    <CompatibilityBadge
+                                        icon={Home}
+                                        label={translations.temperament.house}
+                                        positivePrefix={translations.temperament.goodIn}
+                                        negativePrefix={translations.temperament.badIn}
+                                        isCompatible={temperament.goodInHouse!}
+                                    />
+                                )}
+                                {temperament.goodInGarden !== null && (
+                                    <CompatibilityBadge
+                                        icon={Trees}
+                                        label={translations.temperament.garden}
+                                        positivePrefix={translations.temperament.goodIn}
+                                        negativePrefix={translations.temperament.badIn}
+                                        isCompatible={temperament.goodInGarden!}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
+
+            <PostedBy association={association} user={user} label={translations.postedBy} />
 
             {/* Contact Button */}
             <Button size="lg" className="w-full">

@@ -4,12 +4,15 @@ import {
   type HealthInfo,
   type AdoptionRequirements,
 } from "@/db/schema/posts-schema";
+import { type Association, type User } from "@/db/schema/auth-schema";
 import { eq } from "drizzle-orm";
 import { AdoptionPostExtended } from "./getPosts";
 
 export type AdoptionPostDetail = AdoptionPostExtended & {
   healthInfo: HealthInfo | null;
   adoptionRequirements: AdoptionRequirements | null;
+  association: Association | null;
+  user: User | null;
 };
 
 export async function getPostById(

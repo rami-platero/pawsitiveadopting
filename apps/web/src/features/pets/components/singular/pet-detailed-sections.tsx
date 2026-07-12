@@ -39,6 +39,7 @@ type PetDetailedSectionsProps = {
         temperament: {
             title: string;
             energyLevel: string;
+            energyLevelValues: Record<string, string>;
             playfulness: string;
             trainingLevel: string;
             reactionToStrangers: string;
@@ -87,7 +88,7 @@ export default function PetDetailedSections({ temperament, healthInfo, adoptionR
                         {temperament.energyLevel && (
                             <InfoField
                                 label={translations.temperament.energyLevel}
-                                value={temperament.energyLevel}
+                                value={translations.temperament.energyLevelValues[temperament.energyLevel] ?? temperament.energyLevel}
                                 capitalize
                             />
                         )}
@@ -118,7 +119,7 @@ export default function PetDetailedSections({ temperament, healthInfo, adoptionR
                             <p className="text-sm text-muted-foreground mb-2">{translations.temperament.tags}</p>
                             <div className="flex flex-wrap gap-2">
                                 {temperament.temperamentTags.map((tag, index) => (
-                                    <Badge key={index} variant="secondary">{tag}</Badge>
+                                    <Badge key={index} variant="secondary">{tag.charAt(0).toUpperCase() + tag.slice(1)}</Badge>
                                 ))}
                             </div>
                         </div>

@@ -332,6 +332,110 @@
         "cats": "Chats",
         "others": "Autres"
       }
+    },
+    "PetDetail": {
+      "backToHome": "Retour à la navigation",
+      "badge": {
+        "available": "Disponible",
+        "pending": "En attente",
+        "adopted": "Adopté"
+      },
+      "contactButton": "Contacter pour l'adoption",
+      "postedBy": "Publié par",
+      "aboutSection": {
+        "title": "À propos de {name}",
+        "description": "Description",
+        "details": {
+          "breed": "Race",
+          "age": "Âge",
+          "sex": "Sexe",
+          "size": "Taille",
+          "coatLength": "Longueur du pelage",
+          "coatColor": "Couleur",
+          "ageGroup": "Groupe d'âge",
+          "energyLevel": "Niveau d'énergie",
+          "years": "{count} ans",
+          "mixedBreed": "Race mixte",
+          "sexValues": {
+            "male": "Mâle",
+            "female": "Femelle"
+          },
+          "sizeValues": {
+            "small": "Petit",
+            "medium": "Moyen",
+            "large": "Grand",
+            "giant": "Géant"
+          },
+          "coatLengthValues": {
+            "hairless": "Sans poil",
+            "short": "Court",
+            "medium": "Moyen",
+            "long": "Long"
+          },
+          "ageGroupValues": {
+            "puppy/kitten": "Chiot/Chaton",
+            "young": "Jeune",
+            "adult": "Adulte",
+            "senior": "Senior"
+          }
+        },
+        "temperament": {
+          "title": "Tempérament",
+          "compatibility": "Compatibilité",
+          "goodWith": "Bon avec",
+          "badWith": "Mauvais avec",
+          "kids": "Enfants",
+          "dogs": "Chiens",
+          "cats": "Chats",
+          "otherAnimals": "Autres animaux",
+          "environmentTitle": "Environnement",
+          "goodIn": "Bon en",
+          "badIn": "Mauvais en",
+          "apartment": "Appartement",
+          "house": "Maison",
+          "garden": "Jardin",
+          "energyLevel": "Niveau d'énergie",
+          "energyLevelValues": {
+            "low": "Faible",
+            "medium": "Moyen",
+            "high": "Élevé"
+          },
+          "playfulness": "Jouabilité",
+          "trainingLevel": "Niveau d'entraînement",
+          "reactionToStrangers": "Réaction aux étrangers",
+          "tags": "Traits de personnalité",
+          "fears": "Peur(s)",
+          "yes": "Oui",
+          "no": "Non",
+          "unknown": "Inconnu"
+        }
+      },
+      "healthSection": {
+        "title": "Informations de santé",
+        "spayedNeutered": "Stérilisé/Castré",
+        "vaccinated": "Vacciné",
+        "identification": "Puce électronique",
+        "specialNeeds": "Besoins spéciaux",
+        "specialNeedsDescription": "Description des besoins spéciaux",
+        "healthIssues": "Problèmes de santé",
+        "disability": "Handicap",
+        "yes": "Oui",
+        "no": "Non",
+        "none": "Aucun"
+      },
+      "requirementsSection": {
+        "title": "Exigences d'adoption",
+        "feeIncludes": "Frais inclus",
+        "homeCheckRequired": "Vérification du domicile requise",
+        "fencedYardRequired": "Jardin clôturé requis",
+        "indoorOnly": "Usage intérieur uniquement",
+        "experienceRequired": "Expérience requise",
+        "documentsRequired": "Documents requis",
+        "adoptionContract": "Contrat d'adoption",
+        "yes": "Oui",
+        "no": "Non",
+        "notSpecified": "Non spécifié"
+      }
     }
   },
   "Browse": {

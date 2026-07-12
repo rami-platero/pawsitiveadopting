@@ -341,6 +341,7 @@
         "adopted": "Adopted"
       },
       "contactButton": "Contact About Adoption",
+      "postedBy": "Posted by",
       "aboutSection": {
         "title": "About {name}",
         "description": "Description",
@@ -354,16 +355,51 @@
           "ageGroup": "Age Group",
           "energyLevel": "Energy Level",
           "years": "{count} years old",
-          "mixedBreed": "Mixed Breed"
+          "mixedBreed": "Mixed Breed",
+          "sexValues": {
+            "male": "Male",
+            "female": "Female"
+          },
+          "sizeValues": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large",
+            "giant": "Giant"
+          },
+          "coatLengthValues": {
+            "hairless": "Hairless",
+            "short": "Short",
+            "medium": "Medium",
+            "long": "Long"
+          },
+          "ageGroupValues": {
+            "puppy/kitten": "Puppy/Kitten",
+            "young": "Young",
+            "adult": "Adult",
+            "senior": "Senior"
+          }
         },
         "temperament": {
           "title": "Temperament",
-          "goodWith": "Good With",
+          "compatibility": "Compatibility",
+          "goodWith": "Okay With",
+          "badWith": "Not Okay With",
           "kids": "Kids",
           "dogs": "Dogs",
           "cats": "Cats",
           "otherAnimals": "Other Animals",
+          "environmentTitle": "Environment",
+          "goodIn": "Okay In",
+          "badIn": "Not Okay In",
+          "apartment": "Apartment",
+          "house": "House",
+          "garden": "Garden",
           "energyLevel": "Energy Level",
+          "energyLevelValues": {
+            "low": "Low",
+            "medium": "Medium",
+            "high": "High"
+          },
           "playfulness": "Playfulness",
           "trainingLevel": "Training Level",
           "reactionToStrangers": "Reaction to Strangers",

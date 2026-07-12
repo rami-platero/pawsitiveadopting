@@ -1,31 +1,34 @@
 import { LucideIcon } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@pawsitiveadopting/ui/components/tooltip';
 
 type CompatibilityBadgeProps = {
     icon: LucideIcon;
     label: string;
+    positivePrefix: string;
+    negativePrefix: string;
     isCompatible: boolean;
 };
 
 /**
- * A reusable component for displaying compatibility indicators (good with kids, dogs, etc.).
- * Shows an icon with conditional styling based on compatibility status.
+ * A reusable icon-only indicator (good with kids, dogs, etc.).
+ * Shows a colored icon button; hovering reveals "Okay With"/"Not Okay With" (or "In") + the label via a tooltip.
  */
-export default function CompatibilityBadge({ icon: Icon, label, isCompatible }: CompatibilityBadgeProps) {
+export default function CompatibilityBadge({ icon: Icon, label, positivePrefix, negativePrefix, isCompatible }: CompatibilityBadgeProps) {
     return (
-        <div className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg transition-colors ${isCompatible
-                ? 'bg-green-50 dark:bg-green-950/30'
-                : 'bg-red-200/40'
-            }`}>
-            <Icon className={`h-5 w-5 shrink-0 ${isCompatible
-                    ? 'text-green-600 dark:text-green-500'
-                    : 'text-red-500/50'
-                }`} />
-            <span className={`text-sm font-medium ${isCompatible
-                    ? 'text-green-900 dark:text-green-100'
-                    : 'text-red-500/60'
-                }`}>
-                {label}
-            </span>
-        </div>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <div
+                    className={`flex items-center justify-center cursor-default ${isCompatible
+                        ? 'text-success-foreground'
+                        : 'text-destructive'
+                        }`}
+                >
+                    <Icon className="h-8 w-8 shrink-0" />
+                </div>
+            </TooltipTrigger>
+            <TooltipContent>
+                {isCompatible ? positivePrefix : negativePrefix} {label}
+            </TooltipContent>
+        </Tooltip>
     );
 }
