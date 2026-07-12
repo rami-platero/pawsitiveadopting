@@ -335,7 +335,7 @@
       }
     },
     "PetDetail": {
-      "backToHome": "Volver a explorar",
+      "backToAssociation": "Volver a {name}",
       "badge": {
         "available": "Disponible",
         "pending": "Pendiente",
@@ -454,5 +454,8 @@
     "Detail": {
       "petsTitle": "Mascotas disponibles para adopción"
     }
+  },
+  "Breadcrumb": {
+    "home": "Inicio"
   }
 }

@@ -10,6 +10,8 @@ import { searchParamsSchema } from '@/features/pets/schema/searchParams.schema';
 import { parseParams } from '@/features/pets/utils/parser.helper';
 import { getAvailableFilters } from '@/features/pets/data-access/getFilters';
 import FilteredPostsResults from '@/features/pets/components/browse/filtered-posts-results';
+import Container from '@/shared/components/Container';
+import SetBreadcrumbLabel from '@/shared/components/set-breadcrumb-label';
 
 type Props = {
     params: Promise<{ slug: string; locale: string }>;
@@ -64,34 +66,43 @@ export default async function AssociationDetailPage({ params, searchParams }: Pr
     });
 
     return (
-        <div className="py-8">
-            <div className="mb-8 flex items-center gap-4">
-                <Avatar image={association.logo} alt={association.name} size={72} />
-                <div>
-                    <h1 className="text-3xl font-bold">{association.name}</h1>
-                    {(association.city || association.country) && (
-                        <div className="flex items-center gap-1.5 text-muted-foreground mt-1">
-                            <MapPin className="h-4 w-4 shrink-0" />
-                            <span>{[association.city, association.state, association.country].filter(Boolean).join(', ')}</span>
-                        </div>
-                    )}
+        <Container>
+            <div className="py-8">
+                <SetBreadcrumbLabel label={association.name} />
+
+                <div className="mb-8 flex items-center gap-4">
+                    <Avatar image={association.logo} alt={association.name} size={72} />
+                    <div>
+                        <h1 className="text-3xl font-bold">{association.name}</h1>
+                        {(association.city || association.country) && (
+                            <div className="flex items-center gap-1.5 text-muted-foreground mt-1">
+                                <MapPin className="h-4 w-4 shrink-0" />
+                                <span>{[association.city, association.state, association.country].filter(Boolean).join(', ')}</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {association.description && (
+                    <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
+                        {association.description}
+                    </p>
+                )}
+
+                <h2 className="text-xl font-semibold mb-4">{t('petsTitle')}</h2>
+
+                <div className='grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-4'>
+                    <Filters availableFilters={availableFilters} />
+                    <Suspense key={JSON.stringify(parsedParams)} fallback={<PostsGridSkeleton />}>
+                        <FilteredPostsResults
+                            filters={parsedParams}
+                            associationId={association.id}
+                            associationSlug={slug}
+                            associationName={association.name}
+                        />
+                    </Suspense>
                 </div>
             </div>
-
-            {association.description && (
-                <p className="text-muted-foreground leading-relaxed mb-8 max-w-3xl">
-                    {association.description}
-                </p>
-            )}
-
-            <h2 className="text-xl font-semibold mb-4">{t('petsTitle')}</h2>
-
-            <div className='grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-4'>
-                <Filters availableFilters={availableFilters} />
-                <Suspense key={JSON.stringify(parsedParams)} fallback={<PostsGridSkeleton />}>
-                    <FilteredPostsResults filters={parsedParams} associationId={association.id} />
-                </Suspense>
-            </div>
-        </div>
+        </Container>
     );
 }

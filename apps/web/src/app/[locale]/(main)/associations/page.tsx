@@ -6,6 +6,7 @@ import { getFilteredAssociations, getAvailableAssociationCountries, LIMIT } from
 import AssociationCard from '@/features/associations/components/association-card';
 import AssociationCountryFilter from '@/features/associations/components/association-country-filter';
 import Pagination from '@/features/pets/components/filters/pagination';
+import Container from '@/shared/components/Container';
 
 export async function generateMetadata() {
   const t = await getTranslations('Metadata.Associations');
@@ -39,32 +40,34 @@ export default async function AssociationsPage({ searchParams, params }: Props) 
   ]);
 
   return (
-    <div className="py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
-        <p className="text-muted-foreground">{t('description')}</p>
-      </div>
+    <Container>
+      <div className="py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">{t('title')}</h1>
+          <p className="text-muted-foreground">{t('description')}</p>
+        </div>
 
-      <div className="mb-6">
-        <AssociationCountryFilter
-          countries={countries}
-          label={t('countryFilter.title')}
-          allLabel={t('countryFilter.allLabel')}
-        />
-      </div>
+        <div className="mb-6">
+          <AssociationCountryFilter
+            countries={countries}
+            label={t('countryFilter.title')}
+            allLabel={t('countryFilter.allLabel')}
+          />
+        </div>
 
-      {associations.length === 0 ? (
-        <p className="text-muted-foreground">{t('noResults')}</p>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {associations.map((association) => (
-              <AssociationCard key={association.id} association={association} />
-            ))}
-          </div>
-          <Pagination amountPages={Math.ceil(count / LIMIT)} />
-        </>
-      )}
-    </div>
+        {associations.length === 0 ? (
+          <p className="text-muted-foreground">{t('noResults')}</p>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {associations.map((association) => (
+                <AssociationCard key={association.id} association={association} />
+              ))}
+            </div>
+            <Pagination amountPages={Math.ceil(count / LIMIT)} />
+          </>
+        )}
+      </div>
+    </Container>
   );
 }

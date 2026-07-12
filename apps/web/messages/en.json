@@ -335,7 +335,7 @@
       }
     },
     "PetDetail": {
-      "backToHome": "Back to Browse",
+      "backToAssociation": "Back to {name}",
       "badge": {
         "available": "Available",
         "pending": "Pending",
@@ -454,5 +454,8 @@
     "Detail": {
       "petsTitle": "Pets Available for Adoption"
     }
+  },
+  "Breadcrumb": {
+    "home": "Home"
   }
 }
