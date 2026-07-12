@@ -73,6 +73,11 @@
       "title": "{name} - Disponible para Adopción",
       "description": "Conoce a {name}, buscando un hogar amoroso.",
       "notFound": "Mascota no encontrada"
+    },
+    "AssociationDetail": {
+      "title": "{name} - Mascotas Disponibles para Adopción",
+      "description": "Mira todas las mascotas disponibles para adopción de {name}.",
+      "notFound": "Asociación no encontrada"
     }
   },
   "HomePage": {
@@ -332,5 +337,17 @@
   "Browse": {
     "title": "Explorar Mascotas",
     "description": "Encuentra tu compañero perfecto"
+  },
+  "Associations": {
+    "title": "Asociaciones",
+    "description": "Descubre asociaciones de adopción de todo el mundo.",
+    "noResults": "No se encontraron asociaciones.",
+    "countryFilter": {
+      "title": "País",
+      "allLabel": "Todos los países"
+    },
+    "Detail": {
+      "petsTitle": "Mascotas disponibles para adopción"
+    }
   }
 }

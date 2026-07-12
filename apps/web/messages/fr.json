@@ -73,6 +73,11 @@
       "title": "{name} - Disponible pour l'Adoption",
       "description": "Rencontrez {name}, à la recherche d'un foyer aimant.",
       "notFound": "Animal non trouvé"
+    },
+    "AssociationDetail": {
+      "title": "{name} - Animaux Disponibles pour l'Adoption",
+      "description": "Découvrez tous les animaux disponibles pour l'adoption chez {name}.",
+      "notFound": "Association non trouvée"
     }
   },
   "HomePage": {
@@ -332,5 +337,17 @@
   "Browse": {
     "title": "Parcourir les Animaux",
     "description": "Trouvez votre compagnon idéal"
+  },
+  "Associations": {
+    "title": "Associations",
+    "description": "Découvrez des associations d'adoption du monde entier.",
+    "noResults": "Aucune association trouvée.",
+    "countryFilter": {
+      "title": "Pays",
+      "allLabel": "Tous les pays"
+    },
+    "Detail": {
+      "petsTitle": "Animaux disponibles pour l'adoption"
+    }
   }
 }

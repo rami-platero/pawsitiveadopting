@@ -2,16 +2,18 @@ import Image from "next/image";
 
 type Props = {
     image?: string | null;
+    alt?: string;
+    size?: number;
 }
 
-const Avatar = ({ image }: Props) => {
+const Avatar = ({ image, alt = "Avatar", size = 40 }: Props) => {
 
     if (!image) {
-        return <div className="w-10 h-10 bg-secondary rounded-full cursor-pointer" />
+        return <div className="bg-secondary rounded-full cursor-pointer" style={{ width: size, height: size }} />
     }
 
     return (
-        <Image src={image} alt="Avatar" width={40} height={40} className="object-cover rounded-full cursor-pointer" />
+        <Image src={image} alt={alt} width={size} height={size} className="object-cover rounded-full cursor-pointer" style={{ width: size, height: size }} />
     )
 }
 

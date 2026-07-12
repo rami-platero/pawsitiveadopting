@@ -73,6 +73,11 @@
       "title": "{name} - Available for Adoption",
       "description": "Meet {name}, looking for a loving home.",
       "notFound": "Pet Not Found"
+    },
+    "AssociationDetail": {
+      "title": "{name} - Pets Available for Adoption",
+      "description": "See all pets available for adoption from {name}.",
+      "notFound": "Association Not Found"
     }
   },
   "HomePage": {
@@ -400,5 +405,17 @@
   "Browse": {
     "title": "Browse Pets",
     "description": "Find your perfect companion"
+  },
+  "Associations": {
+    "title": "Associations",
+    "description": "Discover adoption associations from around the world.",
+    "noResults": "No associations found.",
+    "countryFilter": {
+      "title": "Country",
+      "allLabel": "All Countries"
+    },
+    "Detail": {
+      "petsTitle": "Pets Available for Adoption"
+    }
   }
 }

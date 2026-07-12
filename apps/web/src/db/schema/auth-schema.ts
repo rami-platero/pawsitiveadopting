@@ -5,6 +5,7 @@ import {
   boolean,
   pgEnum,
   integer,
+  real,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -91,6 +92,12 @@ export const association = pgTable("association", {
   logo: text("logo"),
   createdAt: timestamp("created_at").notNull(),
   metadata: text("metadata"),
+  description: text("description"),
+  city: text("city"),
+  state: text("state"),
+  country: text("country"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
 });
 
 export const memberRolesEnum = pgEnum("memberRole", [

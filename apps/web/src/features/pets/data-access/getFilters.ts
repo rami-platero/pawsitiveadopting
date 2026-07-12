@@ -21,6 +21,7 @@ export type FilterParams = {
   goodInApartment?: boolean;
   goodInHouse?: boolean;
   goodInGarden?: boolean;
+  associationId?: string;
 };
 
 export type FacetOption = {
@@ -35,6 +36,10 @@ export function buildConditions(
   const conditions = [];
 
   conditions.push(eq(adoptionPost.status, "available"));
+
+  if (params.associationId) {
+    conditions.push(eq(adoptionPost.associationId, params.associationId));
+  }
 
   pushInArrayCondition(
     params.type,

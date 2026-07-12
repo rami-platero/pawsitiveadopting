@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const crumbs: Record<string, string> = {
     "browse": "Browse Pets",
+    "associations": "Associations",
     "/": "Home",
 };
 
