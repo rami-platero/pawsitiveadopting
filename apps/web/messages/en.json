@@ -271,6 +271,7 @@
       "title": "Filters",
       "clearAll": "Clear all",
       "radius": "Radius",
+      "sameCountryOnly": "Only show pets from my country",
       "sortBy": {
         "title": "Sort By",
         "newest": "Newest",

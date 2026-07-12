@@ -271,6 +271,7 @@
       "title": "Filtres",
       "clearAll": "Tout effacer",
       "radius": "Rayon",
+      "sameCountryOnly": "Afficher uniquement les animaux de mon pays",
       "sortBy": {
         "title": "Trier par",
         "newest": "Plus récent",

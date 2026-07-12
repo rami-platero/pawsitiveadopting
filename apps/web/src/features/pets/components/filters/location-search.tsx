@@ -22,6 +22,7 @@ type Props = {
     name: string;
     lat: number;
     lng: number;
+    country: string;
   }) => void;
   onClear: () => void;
 };
@@ -104,6 +105,7 @@ export default function LocationSearch({
       name: displayName || suggestion.displayName,
       lat: suggestion.latitude,
       lng: suggestion.longitude,
+      country: suggestion.country,
     });
   };
 

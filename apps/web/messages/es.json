@@ -271,6 +271,7 @@
       "title": "Filtros",
       "clearAll": "Borrar todo",
       "radius": "Radio",
+      "sameCountryOnly": "Mostrar solo mascotas de mi país",
       "sortBy": {
         "title": "Ordenar por",
         "newest": "Más reciente",

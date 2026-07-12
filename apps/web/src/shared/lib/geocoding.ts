@@ -28,6 +28,41 @@ export type LocationSuggestion = {
   longitude: number;
 };
 
+type NominatimSearchItem = {
+  place_id: number;
+  display_name: string;
+  address?: {
+    city?: string;
+    town?: string;
+    village?: string;
+    municipality?: string;
+    state?: string;
+    country?: string;
+    country_code?: string;
+  };
+  lat: string;
+  lon: string;
+};
+
+function normalizeText(value: string): string {
+  return value.trim().toLowerCase();
+}
+
+function buildLocationLabel(city: string, state: string | null, country: string, fallback: string): string {
+  const parts = [city, state, country].filter(Boolean);
+  if (parts.length === 0) {
+    return fallback;
+  }
+
+  return parts.join(", ");
+}
+
+function buildSuggestionKey(suggestion: Pick<LocationSuggestion, "city" | "state" | "country">): string {
+  return [suggestion.city, suggestion.state ?? "", suggestion.country]
+    .map(normalizeText)
+    .join("|");
+}
+
 /**
  * Forward geocode: convert a place name/address to coordinates.
  */
@@ -73,6 +108,29 @@ export async function geocodeAddress(
   }
 }
 
+function mapSearchItem(item: NominatimSearchItem): LocationSuggestion {
+  const address = item.address || {};
+  const city =
+    address.city ||
+    address.town ||
+    address.village ||
+    address.municipality ||
+    "";
+  const state = address.state || null;
+  const countryCode = address.country_code?.toUpperCase() || "";
+  const countryLabel = address.country || countryCode;
+
+  return {
+    placeId: String(item.place_id),
+    displayName: buildLocationLabel(city, state, countryLabel, item.display_name),
+    city,
+    state,
+    country: countryCode,
+    latitude: parseFloat(item.lat),
+    longitude: parseFloat(item.lon),
+  };
+}
+
 /**
  * Search for location suggestions (for autocomplete).
  */
@@ -94,40 +152,23 @@ export async function searchLocations(
 
     if (!response.ok) return [];
 
-    const data = await response.json();
+    const data = (await response.json()) as NominatimSearchItem[];
+    const uniqueSuggestions = new Map<string, LocationSuggestion>();
 
-    return data.map(
-      (item: {
-        place_id: number;
-        display_name: string;
-        address?: {
-          city?: string;
-          town?: string;
-          village?: string;
-          municipality?: string;
-          state?: string;
-          country_code?: string;
-        };
-        lat: string;
-        lon: string;
-      }) => {
-        const address = item.address || {};
-        return {
-          placeId: String(item.place_id),
-          displayName: item.display_name,
-          city:
-            address.city ||
-            address.town ||
-            address.village ||
-            address.municipality ||
-            "",
-          state: address.state || null,
-          country: address.country_code?.toUpperCase() || "",
-          latitude: parseFloat(item.lat),
-          longitude: parseFloat(item.lon),
-        };
-      },
-    );
+    for (const item of data) {
+      const suggestion = mapSearchItem(item);
+      const key = buildSuggestionKey(suggestion);
+
+      if (!uniqueSuggestions.has(key)) {
+        uniqueSuggestions.set(key, suggestion);
+      }
+
+      if (uniqueSuggestions.size >= limit) {
+        break;
+      }
+    }
+
+    return Array.from(uniqueSuggestions.values());
   } catch {
     console.error("Location search failed for query:", query);
     return [];
