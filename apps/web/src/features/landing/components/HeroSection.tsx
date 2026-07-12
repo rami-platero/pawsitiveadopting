@@ -1,8 +1,8 @@
 import { type Locale } from "next-intl";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@pawsitiveadopting/ui/components/button";
 import { getTranslations } from "next-intl/server";
+import HeroLocationSearch from "./HeroLocationSearch";
 
 type Props = {
   locale: Locale
@@ -44,16 +44,10 @@ export default async function HeroSection({ locale }: Props) {
               </span>
             </div>
 
-            <div className="relative z-10 flex items-center gap-3 pt-7">
-              <input
-                type="text"
-                placeholder={t("input.placeholder")}
-                className="flex-1 rounded-2xl border-2 border-secondary bg-background px-4 py-3 text-base placeholder-secondary pr-30"
-              />
-              <Button className="rounded-2xl bg-red-300 hover:bg-red-400 text-black font-semibold px-4 sm:px-6 py-3 h-auto text-sm absolute right-1">
-                {t("input.button")}
-              </Button>
-            </div>
+            <HeroLocationSearch
+              placeholder={t("input.placeholder")}
+              buttonText={t("input.button")}
+            />
           </div>
 
           {/* CTA Section */}
