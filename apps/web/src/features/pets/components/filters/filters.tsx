@@ -1,6 +1,7 @@
 "use client"
 import CheckboxFilter from '@/shared/components/filters/checkbox-filter'
 import { Button } from '@pawsitiveadopting/ui/components/button'
+import { Checkbox } from '@pawsitiveadopting/ui/components/checkbox'
 import { Label } from '@pawsitiveadopting/ui/components/label'
 import { RadioGroup, RadioGroupItem } from '@pawsitiveadopting/ui/components/radio-group'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@pawsitiveadopting/ui/components/sheet'
@@ -39,16 +40,22 @@ const Filters = ({ availableFilters }: Props) => {
         lat: parseAsFloat.withOptions({ shallow: false }),
         lng: parseAsFloat.withOptions({ shallow: false }),
         radius: parseAsFloat.withDefault(50).withOptions({ shallow: false }),
-        page: parseAsString.withDefault('1').withOptions({ shallow: false }),
+        country: parseAsString.withDefault('').withOptions({ shallow: false }),
+        sameCountryOnly: parseAsString.withDefault('false').withOptions({ shallow: false }),
         sortBy: parseAsString.withDefault('newest').withOptions({ shallow: false }),
         sex: parseAsString.withDefault('').withOptions({ shallow: false }),
+        goodWithKids: parseAsString.withDefault('false').withOptions({ shallow: false, throttleMs: 500 }),
+        goodWithDogs: parseAsString.withDefault('false').withOptions({ shallow: false, throttleMs: 500 }),
+        goodWithCats: parseAsString.withDefault('false').withOptions({ shallow: false, throttleMs: 500 }),
+        goodInApartment: parseAsString.withDefault('false').withOptions({ shallow: false, throttleMs: 500 }),
+        goodInHouse: parseAsString.withDefault('false').withOptions({ shallow: false, throttleMs: 500 }),
+        goodInGarden: parseAsString.withDefault('false').withOptions({ shallow: false, throttleMs: 500 }),
     })
 
 
     const toggleFilter = (filterKey: 'type' | 'age' | 'color', value: string) => {
         setFilters((current) => ({
             ...current,
-            page: null,
             [filterKey]: current[filterKey].includes(value)
                 ? current[filterKey].filter((item) => item !== value)
                 : [...current[filterKey], value]
@@ -58,7 +65,6 @@ const Filters = ({ availableFilters }: Props) => {
     const toggleSortBy = (value: string) => {
         setFilters((current) => ({
             ...current,
-            page: null,
             sortBy: value
         }))
     }
@@ -86,6 +92,36 @@ const Filters = ({ availableFilters }: Props) => {
         { value: 'cat', label: t('animalType.cat') },
     ]
 
+    type GoodWithKey = 'goodWithKids' | 'goodWithDogs' | 'goodWithCats'
+    type GoodInKey = 'goodInApartment' | 'goodInHouse' | 'goodInGarden'
+
+    const GOOD_WITH_OPTIONS: { value: GoodWithKey; label: string }[] = [
+        { value: 'goodWithKids', label: t('goodWith.kids') },
+        { value: 'goodWithDogs', label: t('goodWith.dogs') },
+        { value: 'goodWithCats', label: t('goodWith.cats') },
+    ]
+
+    const GOOD_IN_OPTIONS: { value: GoodInKey; label: string }[] = [
+        { value: 'goodInApartment', label: t('goodIn.apartment') },
+        { value: 'goodInHouse', label: t('goodIn.house') },
+        { value: 'goodInGarden', label: t('goodIn.garden') },
+    ]
+
+    const toggleBooleanFilter = (key: GoodWithKey | GoodInKey) => {
+        setFilters((current) => ({
+            ...current,
+            [key]: current[key] === 'true' ? null : 'true',
+        }))
+    }
+
+    const goodWithSelected = GOOD_WITH_OPTIONS
+        .filter((option) => filters[option.value] === 'true')
+        .map((option) => option.value)
+
+    const goodInSelected = GOOD_IN_OPTIONS
+        .filter((option) => filters[option.value] === 'true')
+        .map((option) => option.value)
+
     const RADIUS_OPTIONS = [10, 25, 50, 100, 200];
 
     const FiltersContent = () => (
@@ -106,7 +142,7 @@ const Filters = ({ availableFilters }: Props) => {
                         location: loc.name,
                         lat: loc.lat,
                         lng: loc.lng,
-                        page: null,
+                        country: loc.country,
                     })
                 }}
                 onClear={() => {
@@ -114,7 +150,8 @@ const Filters = ({ availableFilters }: Props) => {
                         location: null,
                         lat: null,
                         lng: null,
-                        page: null,
+                        country: null,
+                        sameCountryOnly: null,
                     })
                 }}
             />
@@ -124,7 +161,7 @@ const Filters = ({ availableFilters }: Props) => {
                     <Label className='text-sm font-medium'>{t('radius')}</Label>
                     <RadioGroup
                         value={String(filters.radius ?? 50)}
-                        onValueChange={(val) => setFilters({ radius: Number(val), page: null })}
+                        onValueChange={(val) => setFilters({ radius: Number(val) })}
                         className='flex flex-wrap gap-2'
                     >
                         {RADIUS_OPTIONS.map((r) => (
@@ -134,6 +171,21 @@ const Filters = ({ availableFilters }: Props) => {
                             </div>
                         ))}
                     </RadioGroup>
+
+                    {filters.country && (
+                        <div className='flex items-center gap-2 pt-1'>
+                            <Checkbox
+                                id='same-country-only'
+                                checked={filters.sameCountryOnly === 'true'}
+                                onCheckedChange={(checked) =>
+                                    setFilters({ sameCountryOnly: checked ? 'true' : null })
+                                }
+                            />
+                            <Label htmlFor='same-country-only' className='text-xs text-gray-700 cursor-pointer'>
+                                {t('sameCountryOnly')}
+                            </Label>
+                        </div>
+                    )}
                 </div>
             )}
 
@@ -162,7 +214,7 @@ const Filters = ({ availableFilters }: Props) => {
                 name={t('sex.title')}
                 options={sexOptions}
                 selectedValue={filters.sex}
-                onChange={(value) => setFilters({ sex: value, page: null })}
+                onChange={(value) => setFilters({ sex: value })}
             />
 
             <CheckboxFilter
@@ -177,6 +229,20 @@ const Filters = ({ availableFilters }: Props) => {
                 options={colorOptions}
                 selectedValues={filters.color}
                 onToggle={(value) => toggleFilter('color', value)}
+            />
+
+            <CheckboxFilter
+                name={t('goodWith.title')}
+                options={GOOD_WITH_OPTIONS}
+                selectedValues={goodWithSelected}
+                onToggle={(value) => toggleBooleanFilter(value as GoodWithKey)}
+            />
+
+            <CheckboxFilter
+                name={t('goodIn.title')}
+                options={GOOD_IN_OPTIONS}
+                selectedValues={goodInSelected}
+                onToggle={(value) => toggleBooleanFilter(value as GoodInKey)}
             />
         </>
     )

@@ -17,7 +17,6 @@ function stringToEnumArray<T extends [string, ...string[]]>(values: T) {
 }
 
 export const searchParamsSchema = z.object({
-  page: z.coerce.number().int().min(1).optional().default(1),
   sortBy: z.enum(["newest", "oldest"]).optional().default("newest"),
 
   search: z.string().optional(),
@@ -27,6 +26,11 @@ export const searchParamsSchema = z.object({
   lat: z.coerce.number().optional(),
   lng: z.coerce.number().optional(),
   radius: z.coerce.number().min(1).max(500).optional().default(50),
+  country: z.string().optional(),
+  sameCountryOnly: z
+    .string()
+    .optional()
+    .transform((val) => val === "true"),
 
   type: stringToEnumArray(animalTypeEnum.enumValues),
 
@@ -52,6 +56,26 @@ export const searchParamsSchema = z.object({
     .transform((val) => val === "true"),
 
   goodWithDogs: z
+    .string()
+    .optional()
+    .transform((val) => val === "true"),
+
+  goodWithCats: z
+    .string()
+    .optional()
+    .transform((val) => val === "true"),
+
+  goodInApartment: z
+    .string()
+    .optional()
+    .transform((val) => val === "true"),
+
+  goodInHouse: z
+    .string()
+    .optional()
+    .transform((val) => val === "true"),
+
+  goodInGarden: z
     .string()
     .optional()
     .transform((val) => val === "true"),

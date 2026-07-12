@@ -6,10 +6,11 @@ import {
   animalDetails,
   Media,
   Temperament,
+  temperament,
 } from "@/db/schema/posts-schema";
 import { buildConditions } from "@/features/pets/data-access/getFilters";
 import { ParsedSearchParams } from "@/features/pets/schema/searchParams.schema";
-import { asc, count, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, gt, inArray, lt, or, sql } from "drizzle-orm";
 
 export type AdoptionPostExtended = AdoptionPost & {
   media: Media[];
@@ -17,7 +18,12 @@ export type AdoptionPostExtended = AdoptionPost & {
   temperament: Temperament | null;
 };
 
-export const LIMIT = 10;
+export type PostsCursor = {
+  datePosted: Date;
+  id: number;
+};
+
+export const LIMIT = 12;
 
 /**
  * Build a SQL condition for filtering posts within a radius (km) of a point.
@@ -35,44 +41,83 @@ function buildLocationCondition(lat: number, lng: number, radiusKm: number) {
   ) <= ${radiusKm}`;
 }
 
-export async function getFilteredPosts(filters: ParsedSearchParams) {
-  const conditions = buildConditions(filters);
+/**
+ * Keyset ("seek") condition for pagination on the compound (datePosted, id)
+ * sort key. id is used as a tiebreaker since datePosted is not unique.
+ */
+function buildSeekCondition(
+  sortBy: ParsedSearchParams["sortBy"],
+  cursor?: PostsCursor,
+) {
+  if (!cursor) return undefined;
+
+  if (sortBy === "oldest") {
+    return or(
+      gt(adoptionPost.datePosted, cursor.datePosted),
+      and(
+        eq(adoptionPost.datePosted, cursor.datePosted),
+        gt(adoptionPost.id, cursor.id),
+      ),
+    );
+  }
+
+  return or(
+    lt(adoptionPost.datePosted, cursor.datePosted),
+    and(
+      eq(adoptionPost.datePosted, cursor.datePosted),
+      lt(adoptionPost.id, cursor.id),
+    ),
+  );
+}
+
+export async function getFilteredPosts(
+  filters: ParsedSearchParams,
+  associationId?: string,
+  cursor?: PostsCursor,
+) {
+  const conditions = buildConditions({ ...filters, associationId });
 
   // Build location filter if coordinates are provided
-  const locationCondition =
+  const radiusCondition =
     filters.lat !== undefined && filters.lng !== undefined
       ? buildLocationCondition(filters.lat, filters.lng, filters.radius)
       : undefined;
 
-  let orderByCondition = desc(adoptionPost.datePosted);
+  const countryCondition =
+    filters.sameCountryOnly && filters.country
+      ? eq(adoptionPost.country, filters.country)
+      : undefined;
 
-  switch (filters.sortBy) {
-    case "oldest":
-      orderByCondition = asc(adoptionPost.datePosted);
-      break;
-    case "newest":
-    default:
-      orderByCondition = desc(adoptionPost.datePosted);
-      break;
-  }
+  const locationCondition =
+    radiusCondition && countryCondition
+      ? and(radiusCondition, countryCondition)
+      : radiusCondition ?? countryCondition;
 
-  // Combine all conditions (filters + location)
-  const allConditions = locationCondition
-    ? sql`${conditions} AND ${locationCondition}`
-    : conditions;
+  const isOldest = filters.sortBy === "oldest";
+  const orderByCondition = isOldest
+    ? [asc(adoptionPost.datePosted), asc(adoptionPost.id)]
+    : [desc(adoptionPost.datePosted), desc(adoptionPost.id)];
+
+  const seekCondition = buildSeekCondition(filters.sortBy, cursor);
+
+  // Combine all conditions (filters + location); count ignores the seek
+  // condition since it's a running total for the whole filtered set.
+  const countCondition = and(conditions, locationCondition);
+  const baseConditions = and(countCondition, seekCondition);
 
   const [matches, totalCountResult] = await Promise.all([
     db
-      .select({ id: adoptionPost.id })
+      .select({ id: adoptionPost.id, datePosted: adoptionPost.datePosted })
       .from(adoptionPost)
       .innerJoin(
         animalDetails,
         eq(adoptionPost.id, animalDetails.adoptionPostId),
       )
-      .where(allConditions)
-      .orderBy(orderByCondition)
-      .limit(LIMIT)
-      .offset((filters.page - 1) * LIMIT),
+      .leftJoin(temperament, eq(adoptionPost.id, temperament.adoptionPostId))
+      .where(baseConditions)
+      .orderBy(...orderByCondition)
+      // fetch one extra row to detect "has next page" without a second query
+      .limit(LIMIT + 1),
 
     db
       .select({ value: count() })
@@ -81,14 +126,17 @@ export async function getFilteredPosts(filters: ParsedSearchParams) {
         animalDetails,
         eq(adoptionPost.id, animalDetails.adoptionPostId),
       )
-      .where(allConditions),
+      .leftJoin(temperament, eq(adoptionPost.id, temperament.adoptionPostId))
+      .where(countCondition),
   ]);
 
-  const ids = matches.map((row) => row.id);
+  const hasNextPage = matches.length > LIMIT;
+  const pageMatches = hasNextPage ? matches.slice(0, LIMIT) : matches;
+  const ids = pageMatches.map((row) => row.id);
 
   // HANDLE EMPTY RESULTS
   if (ids.length === 0) {
-    return { data: [], count: 0 };
+    return { data: [], count: totalCountResult[0]?.value || 0, nextCursor: null };
   }
 
   const data = await db.query.adoptionPost.findMany({
@@ -101,8 +149,14 @@ export async function getFilteredPosts(filters: ParsedSearchParams) {
     orderBy: orderByCondition,
   });
 
+  const last = pageMatches[pageMatches.length - 1]!;
+  const nextCursor: PostsCursor | null = hasNextPage
+    ? { datePosted: last.datePosted!, id: last.id }
+    : null;
+
   return {
     data,
     count: totalCountResult[0]?.value || 0,
+    nextCursor,
   };
 }

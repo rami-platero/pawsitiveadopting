@@ -1,7 +1,8 @@
+"use client"
 import { Media, Temperament } from '@/db/schema';
 import { AdoptionPostExtended } from '@/features/pets/data-access/getPosts';
 import { Calendar, MapPin, Baby, Dog, Cat, Users } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link'
 import React from 'react'
 import { BsGenderMale } from 'react-icons/bs';
@@ -19,8 +20,8 @@ type Props = {
     temperament: Temperament | null
 }
 
-const PostItem = async ({ id, name, media, ageGroup, sex, city, state, temperament }: Props) => {
-    const t = await getTranslations('Pets.PostItem');
+const PostItem = ({ id, name, media, ageGroup, sex, city, state, temperament }: Props) => {
+    const t = useTranslations('Pets.PostItem');
     const mainImage = media.find((m) => m.isMain)?.url || media[0]?.url;
 
     const compatibilityItems = [
@@ -34,7 +35,7 @@ const PostItem = async ({ id, name, media, ageGroup, sex, city, state, temperame
         <Link
             key={id}
             href={`/pet/${id}`}
-            className="group block overflow-hidden rounded-lg border bg-linear-to-br from-secondary/20 to-muted transition-all h-full flex-col hover:shadow-lg hover:from-secondary/25 hover:to-muted/80"
+            className="group block overflow-hidden rounded-lg border bg-card transition-all h-full flex-col hover:shadow-lg hover:from-secondary/25 hover:to-muted/80"
         >
             <div className="relative aspect-square overflow-hidden bg-muted shrink-0">
                 <PetImage
@@ -44,7 +45,7 @@ const PostItem = async ({ id, name, media, ageGroup, sex, city, state, temperame
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                 />
 
-                <div className="absolute top-3 left-3">
+                <div className="absolute top-3 right-3">
                     <FavoriteButton postId={id} />
                 </div>
             </div>
