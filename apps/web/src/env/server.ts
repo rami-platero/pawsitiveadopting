@@ -1,7 +1,7 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 import { config } from "dotenv";
-config({ path: `.env.${process.env.NODE_ENV}` });
+config({ path: `.env.${process.env.NODE_ENV ?? "development"}` });
 
 export const env = createEnv({
   server: {
@@ -18,6 +18,7 @@ export const env = createEnv({
     EMAIL_SENDER_NAME: z.string().min(1),
     EMAIL_SENDER_ADDRESS: z.email(),
     BASE_URL: z.string().min(1),
+    GOOGLE_GENERATIVE_AI_MODEL: z.string().min(1).optional(),
   },
   experimental__runtimeEnv: process.env,
 });
