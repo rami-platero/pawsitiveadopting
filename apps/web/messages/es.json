@@ -291,6 +291,18 @@
       "color": {
         "title": "Color"
       },
+      "goodWith": {
+        "title": "Se lleva bien con",
+        "kids": "Niños",
+        "dogs": "Perros",
+        "cats": "Gatos"
+      },
+      "goodIn": {
+        "title": "Entorno",
+        "apartment": "Departamento",
+        "house": "Casa",
+        "garden": "Jardín"
+      },
       "location": {
         "title": "Ubicación",
         "placeholder": "Buscar ciudad o código postal..."

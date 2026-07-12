@@ -15,6 +15,12 @@ export type FilterParams = {
   color?: string[];
   sex?: string;
   age?: AgeGroup[];
+  goodWithKids?: boolean;
+  goodWithDogs?: boolean;
+  goodWithCats?: boolean;
+  goodInApartment?: boolean;
+  goodInHouse?: boolean;
+  goodInGarden?: boolean;
 };
 
 export type FacetOption = {
@@ -29,6 +35,7 @@ export function buildConditions(
   const conditions = [];
 
   conditions.push(eq(adoptionPost.status, "available"));
+
   pushInArrayCondition(
     params.type,
     excludeKey,
@@ -55,6 +62,30 @@ export function buildConditions(
     conditions.push(eq(animalDetails.sex, params.sex as Sex));
   }
 
+  if (params.goodWithKids) {
+    conditions.push(eq(temperament.goodWithKids, true));
+  }
+
+  if (params.goodWithDogs) {
+    conditions.push(eq(temperament.goodWithDogs, true));
+  }
+
+  if (params.goodWithCats) {
+    conditions.push(eq(temperament.goodWithCats, true));
+  }
+
+  if (params.goodInApartment) {
+    conditions.push(eq(temperament.goodInApartment, true));
+  }
+
+  if (params.goodInHouse) {
+    conditions.push(eq(temperament.goodInHouse, true));
+  }
+
+  if (params.goodInGarden) {
+    conditions.push(eq(temperament.goodInGarden, true));
+  }
+
   return and(...conditions);
 }
 
@@ -71,6 +102,7 @@ export async function getAvailableFilters(params: FilterParams) {
         adoptionPost,
         eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
+      .leftJoin(temperament, eq(temperament.adoptionPostId, adoptionPost.id))
       .where(buildConditions(params, "sex"))
       .groupBy(animalDetails.sex)
       .orderBy(asc(animalDetails.sex))
@@ -87,6 +119,7 @@ export async function getAvailableFilters(params: FilterParams) {
         adoptionPost,
         eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
+      .leftJoin(temperament, eq(temperament.adoptionPostId, adoptionPost.id))
       .where(buildConditions(params, "color"))
       .groupBy(animalDetails.coatColorPrimary)
       .orderBy(asc(animalDetails.coatColorPrimary)) // Sort alphabetically
@@ -120,6 +153,7 @@ export async function getAvailableFilters(params: FilterParams) {
         adoptionPost,
         eq(animalDetails.adoptionPostId, adoptionPost.id),
       )
+      .leftJoin(temperament, eq(temperament.adoptionPostId, adoptionPost.id))
       .where(buildConditions(params, "age"))
       .groupBy(animalDetails.ageGroup)
       .orderBy(asc(animalDetails.ageGroup))

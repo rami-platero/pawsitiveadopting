@@ -32,7 +32,18 @@ export default async function BrowsePage({ searchParams, params }: Props) {
       redirect(safeURL)
     }
   });
-  const availableFilters = await getAvailableFilters({ type: parsedParams.type, sex: parsedParams.sex, age: parsedParams.age, color: parsedParams.color });
+  const availableFilters = await getAvailableFilters({
+    type: parsedParams.type,
+    sex: parsedParams.sex,
+    age: parsedParams.age,
+    color: parsedParams.color,
+    goodWithKids: parsedParams.goodWithKids,
+    goodWithDogs: parsedParams.goodWithDogs,
+    goodWithCats: parsedParams.goodWithCats,
+    goodInApartment: parsedParams.goodInApartment,
+    goodInHouse: parsedParams.goodInHouse,
+    goodInGarden: parsedParams.goodInGarden,
+  });
 
   return (
     <div className="py-8">

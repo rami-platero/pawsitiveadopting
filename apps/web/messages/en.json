@@ -291,6 +291,18 @@
       "color": {
         "title": "Color"
       },
+      "goodWith": {
+        "title": "Good With",
+        "kids": "Kids",
+        "dogs": "Dogs",
+        "cats": "Cats"
+      },
+      "goodIn": {
+        "title": "Environment",
+        "apartment": "Apartment",
+        "house": "House",
+        "garden": "Garden"
+      },
       "location": {
         "title": "Location",
         "placeholder": "Search city or zip..."

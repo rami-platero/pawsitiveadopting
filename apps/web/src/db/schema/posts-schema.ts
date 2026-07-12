@@ -126,6 +126,9 @@ export const temperament = pgTable("temperament", {
   trainingLevel: text("training_level"),
   reactionToStrangers: text("reaction_to_strangers"),
   fears: text("fears").array(),
+  goodInApartment: boolean("good_in_apartment"),
+  goodInHouse: boolean("good_in_house"),
+  goodInGarden: boolean("good_in_garden"),
 });
 
 // ADOPTION REQUIREMENTS
