@@ -18,11 +18,17 @@ type Props = {
     city: AdoptionPostExtended['city']
     state: AdoptionPostExtended['state']
     temperament: Temperament | null
+    associationSlug?: string
+    associationName?: string
 }
 
-const PostItem = ({ id, name, media, ageGroup, sex, city, state, temperament }: Props) => {
+const PostItem = ({ id, name, media, ageGroup, sex, city, state, temperament, associationSlug, associationName }: Props) => {
     const t = useTranslations('Pets.PostItem');
     const mainImage = media.find((m) => m.isMain)?.url || media[0]?.url;
+
+    const href = associationSlug && associationName
+        ? `/pet/${id}?from=${encodeURIComponent(associationSlug)}&fromName=${encodeURIComponent(associationName)}`
+        : `/pet/${id}`;
 
     const compatibilityItems = [
         { key: 'goodWithKids', value: temperament?.goodWithKids, icon: Baby },
@@ -34,7 +40,7 @@ const PostItem = ({ id, name, media, ageGroup, sex, city, state, temperament }: 
     return (
         <Link
             key={id}
-            href={`/pet/${id}`}
+            href={href}
             className="group block overflow-hidden rounded-lg border bg-card transition-all h-full flex-col hover:shadow-lg hover:from-secondary/25 hover:to-muted/80"
         >
             <div className="relative aspect-square overflow-hidden bg-muted shrink-0">

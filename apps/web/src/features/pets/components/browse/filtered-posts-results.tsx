@@ -5,9 +5,11 @@ import { ParsedSearchParams } from "@/features/pets/schema/searchParams.schema";
 type Props = {
   filters: ParsedSearchParams
   associationId?: string
+  associationSlug?: string
+  associationName?: string
 }
 
-export default async function FilteredPostsResults({ filters, associationId }: Props) {
+export default async function FilteredPostsResults({ filters, associationId, associationSlug, associationName }: Props) {
   const { data, count, nextCursor } = await getFilteredPosts(filters, associationId);
 
   return (
@@ -21,6 +23,8 @@ export default async function FilteredPostsResults({ filters, associationId }: P
         initialCount={count}
         filters={filters}
         associationId={associationId}
+        associationSlug={associationSlug}
+        associationName={associationName}
       />
     </div>
   );

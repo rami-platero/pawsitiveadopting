@@ -6,9 +6,11 @@ import PetMainInfo from '@/features/pets/components/singular/pet-main-info';
 import PetDetailedSections from '@/features/pets/components/singular/pet-detailed-sections';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import SetBreadcrumbLabel from '@/shared/components/set-breadcrumb-label';
 
 type Props = {
     params: Promise<{ id: string; locale: string }>;
+    searchParams: Promise<{ from?: string; fromName?: string }>;
 };
 
 export async function generateMetadata({ params }: Props) {
@@ -28,8 +30,9 @@ export async function generateMetadata({ params }: Props) {
     }
 }
 
-export default async function PetDetailPage({ params }: Props) {
+export default async function PetDetailPage({ params, searchParams }: Props) {
     const { id, locale } = await params;
+    const { from, fromName } = await searchParams;
     const post = await getPostById(id);
     const t = await getTranslations({ locale, namespace: 'Pets.PetDetail' });
 
@@ -41,14 +44,17 @@ export default async function PetDetailPage({ params }: Props) {
 
     return (
         <div className="py-8 max-w-7xl mx-auto px-4">
-            {/* Back Button */}
-            <Link
-                href="/browse"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-            >
-                <ArrowLeft className="h-4 w-4" />
-                {t('backToHome')}
-            </Link>
+            <SetBreadcrumbLabel label={post.name || 'Pet'} />
+
+            {from && fromName && (
+                <Link
+                    href={`/associations/${from}`}
+                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    {t('backToAssociation', { name: fromName })}
+                </Link>
+            )}
 
             {/* Main Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">

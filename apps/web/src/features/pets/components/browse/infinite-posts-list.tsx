@@ -17,6 +17,8 @@ type Props = {
   initialCount: number;
   filters: ParsedSearchParams;
   associationId?: string;
+  associationSlug?: string;
+  associationName?: string;
 };
 
 export default function InfinitePostsList({
@@ -25,6 +27,8 @@ export default function InfinitePostsList({
   initialCount,
   filters,
   associationId,
+  associationSlug,
+  associationName,
 }: Props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfinitePostsQuery({
@@ -64,6 +68,8 @@ export default function InfinitePostsList({
             city={post.city}
             state={post.state}
             temperament={post.temperament}
+            associationSlug={associationSlug}
+            associationName={associationName}
           />
         ))}
       </div>
