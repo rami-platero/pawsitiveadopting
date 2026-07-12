@@ -6,6 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
+        "AUTO_MIGRATE",
         "DATABASE_URL",
         "BETTER_AUTH_SECRET",
         "RESEND_API_KEY",
